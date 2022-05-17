@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <div class="flex justify-center mt-5">
-      <nav class="border-solid border-2 border-sky-500 w-1/2">
-        <p>Movie Recommend Site</p>
-        <br>
-        <router-link :to="{ name: 'movies' }">Total</router-link> |
-        <router-link :to="{ name: 'mine' }">Mine</router-link> |
-        <router-link :to="{ name: 'random' }">Random</router-link> |
-        <router-link :to="{ name: 'community' }">Community</router-link>
-      </nav>
+    <div class="mt-5 border-solid border-2 border-sky-400">
+      <div class="title">
+        <p>🥇Recommend Movie</p>
+      </div>
     </div>
-    <hr>
+    <br>
+    <nav class="flex justify-around">
+      <router-link :to="{ name: 'movies' }">Total</router-link>
+      <router-link :to="{ name: 'mine' }">Mine</router-link>
+      <router-link :to="{ name: 'random' }">Random</router-link>
+      <router-link :to="{ name: 'community' }">Community</router-link>
+    </nav>
+    <br>
+    <br>
     <router-view/>
   </div>
 </template>
@@ -34,12 +37,20 @@ nav {
   padding: 30px;
 }
 
+.title p {
+  font-weight: bold;
+  font-size: 50px;
+}
+
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #321d71;
+  padding: 10px 30px;
+  border: 2px solid black;
+  border-radius: 5%;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #b439ed;
 }
 </style>
