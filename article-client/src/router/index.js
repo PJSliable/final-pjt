@@ -1,24 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MovieView from '@/views/MovieView'
-import CommmunityView from '@/views/CommunityView'
 import MovieList from '@/views/MovieList'
 import MyMovieList from '@/views/MyMovieList'
 import RandomMovieList from '@/views/RandomMovieList'
+import CommmunityView from '@/views/CommunityView'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'movie',
-    component: MovieView
-  },
-  {
-    path: '/community',
-    name: 'community',
-    component: CommmunityView
-  },
   {
     path: '/movies',
     name: 'movies',
@@ -33,6 +22,11 @@ const routes = [
     path: '/random',
     name: 'random',
     component: RandomMovieList
+  },
+  {
+    path: '/community',
+    name: 'community',
+    component: CommmunityView
   },
   {
     path: '/detail/:moviePk',
