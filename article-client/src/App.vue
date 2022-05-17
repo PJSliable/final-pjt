@@ -1,41 +1,12 @@
 <template>
   <div id="app">
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </nav>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import axios from 'axios'
-
-export default {
-  name: 'App',
-  created() {
-    const API_LOGIN_URL = 'http://localhost:8000/dj-rest-auth/login'
-    // const API_ARTICLE_LIST = '/articles/'
-
-    axios.post(API_LOGIN_URL,
-    {
-      username:'12345',
-      password:'123456789!',
-      email:'jongsun199@gmail.com',
-    }
-    )
-    .then(
-      res => {
-        console.log(res)
-      }
-    )
-    .catch(
-      err => {
-        // 추후 상태코드에 따라 처리 
-        console.error(err)
-      }
-    )
-  },
-  components: {
-
-  }
-}
-</script>
 
 <style>
 #app {
@@ -44,6 +15,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
