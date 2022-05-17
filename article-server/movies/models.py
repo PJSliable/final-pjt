@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 
 class Genre(models.Model):
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50)
 
 # Create your models here.
@@ -15,7 +16,7 @@ class Movie(models.Model):
     vote_average = models.FloatField()
     overview = models.TextField()
     poster_path = models.CharField(max_length=200)
-    genres_ids = models.ManyToManyField(Genre)
+    genre_ids = models.ManyToManyField(Genre)
 
 class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
@@ -25,5 +26,3 @@ class Review(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
-
