@@ -1,9 +1,14 @@
 <template>
   <div id="app">
     <nav>
-      <router-link :to="{ name: 'movie' }">Movie</router-link> |
+      <p>Movie Recommend Site</p>
+      <br>
+      <router-link :to="{ name: 'movies' }">Total</router-link> |
+      <router-link :to="{ name: 'mine' }">Mine</router-link> |
+      <router-link :to="{ name: 'random' }">Random</router-link> |
       <router-link :to="{ name: 'community' }">Community</router-link>
     </nav>
+    <hr>
     <router-view/>
   </div>
 </template>
