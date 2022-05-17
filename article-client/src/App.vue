@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <nav>
-      <p>Movie Recommend Site</p>
-      <br>
-      <router-link :to="{ name: 'movies' }">Total</router-link> |
-      <router-link :to="{ name: 'mine' }">Mine</router-link> |
-      <router-link :to="{ name: 'random' }">Random</router-link> |
-      <router-link :to="{ name: 'community' }">Community</router-link>
-    </nav>
+    <div class="flex justify-center">
+      <nav class="border-solid border-2 border-sky-500 w-1/2">
+        <p>Movie Recommend Site</p>
+        <br>
+        <router-link :to="{ name: 'movies' }">Total</router-link> |
+        <router-link :to="{ name: 'mine' }">Mine</router-link> |
+        <router-link :to="{ name: 'random' }">Random</router-link> |
+        <router-link :to="{ name: 'community' }">Community</router-link>
+      </nav>
+    </div>
     <hr>
     <router-view/>
   </div>
