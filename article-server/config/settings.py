@@ -32,11 +32,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # Custom Apps
-    'articles',
     'accounts',
+    'movies',
 
     # Third-party packages
-    'django_seed',
     'corsheaders',
 
     'rest_framework',
@@ -48,8 +47,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
-
 
     # Django cores
     'django.contrib.sites', # core
