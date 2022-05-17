@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="flex justify-center">
+    <div class="flex justify-center mt-5">
       <nav class="border-solid border-2 border-sky-500 w-1/2">
         <p>Movie Recommend Site</p>
         <br>
