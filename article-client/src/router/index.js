@@ -1,27 +1,40 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MovieList from '@/views/MovieList'
-import MyMovieList from '@/views/MyMovieList'
-import RandomMovieList from '@/views/RandomMovieList'
+import SignupView from '@/views/SignupView'
+import LoginView from '@/views/LoginView'
+import MovieView from '@/views/MovieView'
+import MyMovieView from '@/views/MyMovieView'
+import RecommendedView from '@/views/RecommendedView'
 import CommmunityView from '@/views/CommunityView'
+import DetailView from '@/views/DetailView'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/signup',
+    name: 'signup',
+    component: SignupView,
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView,
+  },
+  {
     path: '/movies',
     name: 'movies',
-    component: MovieList
+    component: MovieView
   },
   {
     path: '/mine',
     name: 'mine',
-    component: MyMovieList
+    component: MyMovieView
   },
   {
-    path: '/random',
-    name: 'random',
-    component: RandomMovieList
+    path: '/recommendation',
+    name: 'recommendation',
+    component: RecommendedView
   },
   {
     path: '/community',
@@ -31,7 +44,7 @@ const routes = [
   {
     path: '/detail/:moviePk',
     name: 'detail',
-    component: RandomMovieList
+    component: DetailView
   },
 ]
 

@@ -5,11 +5,15 @@
         <p>🥇Recommend Movie</p>
       </div>
     </div>
+    <div class="accounts">
+      <router-link :to="{ name: 'login' }">Login</router-link> |
+      <router-link :to="{ name: 'signup' }">Signup</router-link>
+    </div>
     <br>
     <nav class="flex justify-around">
       <router-link :to="{ name: 'movies' }">Total</router-link>
       <router-link :to="{ name: 'mine' }">Mine</router-link>
-      <router-link :to="{ name: 'random' }">Random</router-link>
+      <router-link :to="{ name: 'recommendation' }">Random</router-link>
       <router-link :to="{ name: 'community' }">Community</router-link>
     </nav>
     <br>
@@ -48,6 +52,15 @@ nav a {
   padding: 10px 30px;
   border: 2px solid black;
   border-radius: 5%;
+}
+
+.accounts a {
+  font-weight: bold;
+  color: #321d71;
+}
+
+.accounts a.router-link-exact-active {
+  color: #b439ed;
 }
 
 nav a.router-link-exact-active {
