@@ -46,7 +46,10 @@ def save_movie_data():
 #         ...
 #     )
             for movie in movies:
+                print('movie is', movie)
             # 수정 필요함. 미완성
+                if not movie.get('title', 0) or not movie.get('release_date', 0) or not movie.get('vote_average', 0) or not movie.get('overview', 0) or not movie.get('poster_path', 0) or not movie.get('backdrop_path', 0):
+                    continue
                 now_movie = Movie.objects.create(
                     title = movie['title'],
                     release_date = movie['release_date'],
@@ -58,6 +61,7 @@ def save_movie_data():
                 for now in movie['genre_ids']:
                     genre = Genre.objects.get(pk=now)
                     now_movie.genre_ids.add(genre)
+                now_movie.save()
         except:
             break
 
