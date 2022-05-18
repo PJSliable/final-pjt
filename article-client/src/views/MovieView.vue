@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>랜덤 카드 보여주기</p>
+    <p>모든 카드 보여주기</p>
     <MovieCard/>
   </div>
 </template>
@@ -8,8 +8,9 @@
 <script>
 import MovieCard from '@/components/MovieCard.vue'
 
+
 export default {
-  name: 'RandomMovieList',
+  name: 'MovieView',
   components: {
     MovieCard,
   },

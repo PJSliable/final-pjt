@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>모든 카드 보여주기</p>
+    <p>내 카드 보여주기</p>
     <MovieCard/>
   </div>
 </template>
@@ -10,7 +10,7 @@ import MovieCard from '@/components/MovieCard.vue'
 
 
 export default {
-  name: 'MovieList',
+  name: 'MyMovieView',
   components: {
     MovieCard,
   },

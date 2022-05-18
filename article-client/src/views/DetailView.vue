@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'MovieDetail',
+  name: 'DetailView',
   methods: {
     // this.$route.params.moviePk => 영화 pk
   }
