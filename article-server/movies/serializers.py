@@ -9,9 +9,9 @@ class MovieSummarySerializer(serializers.ModelSerializer):
         fields = ('poster_path', 'title', 'vote_average',)
     
 
-class MovieListSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(required=True, default=lambda: random.sample(Genre.objects.all(), 3))
-    movie = MovieSummarySerializer(many=True)
-    class Meta:
-        model = Genre
-        fields = ('id', 'name', 'movie')
+# class MovieListSerializer(serializers.ModelSerializer):
+#     id = serializers.IntegerField(required=True, default=lambda: random.sample(Genre.objects.all(), 3))
+#     movie = MovieSummarySerializer(many=True)
+#     class Meta:
+#         model = Genre
+#         fields = ('id', 'name', 'movie')
