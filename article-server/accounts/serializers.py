@@ -3,7 +3,6 @@ from dj_rest_auth.registration.serializers import RegisterSerializer
 from movies.serializers import MovieSummarySerializer, ReviewSerializer
 from django.contrib.auth import get_user_model
 
-User = get_user_model()
 
 class CustomRegisterSerializer(RegisterSerializer):
     # 추가 설정 필드: nickname
@@ -18,5 +17,5 @@ class ProfileSerializer(serializers.ModelSerializer):
     like_movies = MovieSummarySerializer(many=True)
     reviews = ReviewSerializer(many=True)
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ('username', 'like_movies', 'reviews', )
