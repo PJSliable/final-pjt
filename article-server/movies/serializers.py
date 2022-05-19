@@ -7,7 +7,7 @@ User = get_user_model()
 class MovieSummarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ('poster_path', 'title', 'vote_average',)
+        fields = ('pk','poster_path', 'title', 'vote_average',)
     
 
 class ReviewListSerializer(serializers.ModelSerializer):
@@ -30,20 +30,8 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         fields = ('poster_path', 'title', 'vote_average','release_date', 'backdrop_path', 'genre_ids', 'overview', 'user', 'reviews')
 
 
-class MyReviewSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
     like_users = serializers.IntegerField(source='like_users.count', read_only=True)
     class Meta:
         model = Review
         fields = ('movie', 'like_users', 'rate', 'content', 'created_at', 'updated_at')
-
-
-class ReviewSerializer(serializers.ModelSerializer):
-    class UserSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = User
-            fields = ('pk', 'nickname')
-    user = UserSerializer(read_only=True)
-    class Meta:
-        model = Review
-        fields = ('pk', 'user', 'content', 'movie', 'rate')
-        read_only_fields = ('movie', )

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from movies.serializers import MovieSummarySerializer, MyReviewSerializer
+from movies.serializers import MovieSummarySerializer, ReviewSerializer
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -16,7 +16,7 @@ class CustomRegisterSerializer(RegisterSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     like_movies = MovieSummarySerializer(many=True)
-    reviews = MyReviewSerializer(many=True)
+    reviews = ReviewSerializer(many=True)
     class Meta:
         model = User
         fields = ('username', 'like_movies', 'reviews', )
