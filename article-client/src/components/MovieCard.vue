@@ -1,17 +1,31 @@
 <template>
-  <div>
-    <!-- <p @click="getDetail" :data-movie-pk=movie.pk >카드</p> -->
-  </div>
+    <div class="my-3 w-1/4 p-5">
+      <div>
+        <div class="border border-2 border-black h-full flex flex-col items-center justify-between my-3">
+          <div @click="getDetail">
+            <img :src="imageUrl" alt="movie image" class="w-auto" :data-movie-pk="movie.pk">
+          </div>
+          <div>
+            <span class="movieTitle font-bold text-1/2 text-white">{{ movie.title }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script>
 export default {
   name: 'MovieCard',
   props: {
-    // movie: {
-    //   type: Object,
-    //   required: true
-    // }
+    movie: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    imageUrl() {
+      return this.$store.state.movies.imageBaseUrl + this.movie.poster_path
+    }
   },
   methods: {
     getDetail(event) {
