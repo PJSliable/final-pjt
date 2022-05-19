@@ -15,16 +15,6 @@ def profile(request, username):
     serializer = ProfileSerializer(user)
     return Response(serializer.data)
 
-
-def signup():
-    pass
-    
-def login():
-    pass
-
-def logout():
-    pass
-
 def update():
     pass
 
