@@ -5,6 +5,8 @@ const LOGOUT_URL = 'accounts/logout/'
 const USER_URL = 'accounts/user/'
 const PROFILE_URL = 'accounts/profile/'
 
+const MOVIES_URL = 'movies/'
+
 export default {
   accounts: {
     login: () => API_BASE_URL + LOGIN_URL,
@@ -21,4 +23,7 @@ export default {
   //   comment: (articlePk, commentPk) =>
   //     HOST + ARTICLES + `${articlePk}/` + COMMENTS + `${commentPk}/`,
   // },
+  movies: {
+    movies: () => API_BASE_URL + MOVIES_URL,
+  }
 }
