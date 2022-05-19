@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p @click="getDetail" :data-movie-pk=movie.pk >카드</p>
+    <!-- <p @click="getDetail" :data-movie-pk=movie.pk >카드</p> -->
   </div>
 </template>
 
@@ -8,10 +8,10 @@
 export default {
   name: 'MovieCard',
   props: {
-    movie: {
-      type: Object,
-      required: true
-    }
+    // movie: {
+    //   type: Object,
+    //   required: true
+    // }
   },
   methods: {
     getDetail(event) {

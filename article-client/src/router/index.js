@@ -1,12 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import SignupView from '@/views/SignupView'
-import LoginView from '@/views/LoginView'
-import MovieView from '@/views/MovieView'
-import MyMovieView from '@/views/MyMovieView'
-import RecommendedView from '@/views/RecommendedView'
-import CommmunityView from '@/views/CommunityView'
-import DetailView from '@/views/DetailView'
+import store from '@/store'
+
+import SignupView from '@/views/SignupView.vue'
+import LoginView from '@/views/LoginView.vue'
+import LogoutView from '@/views/LogoutView.vue'
+import ProfileView from '@/views/ProfileView.vue'
+import NotFound404 from '@/views/NotFound404.vue'
+
+import HomeView from '@/views/HomeView.vue'
+import MovieView from '@/views/MovieView.vue'
+import CommmunityView from '@/views/CommunityView.vue'
+import DetailView from '@/views/DetailView.vue'
+
+import Swal from 'sweetalert2'
 
 Vue.use(VueRouter)
 
@@ -22,19 +29,29 @@ const routes = [
     component: LoginView,
   },
   {
-    path: '/movies',
-    name: 'movies',
+    path: '/logout',
+    name: 'logout',
+    component: LogoutView,
+  },
+  {
+    path: '/profile/:username',
+    name: 'profile',
+    component: ProfileView,
+  },
+  {
+    path: '/404',
+    name: 'NotFound404',
+    component: NotFound404
+  },
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView
+  },
+  {
+    path: '/movie',
+    name: 'movie',
     component: MovieView
-  },
-  {
-    path: '/mine',
-    name: 'mine',
-    component: MyMovieView
-  },
-  {
-    path: '/recommendation',
-    name: 'recommendation',
-    component: RecommendedView
   },
   {
     path: '/community',
@@ -46,12 +63,39 @@ const routes = [
     name: 'detail',
     component: DetailView
   },
+  {
+    path: '*',
+    redirect: '/404'
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  store.commit('SET_AUTH_ERROR', null)
+
+  const { isLoggedIn } = store.getters
+  const noAuthPages = ['home', 'login', 'signup']
+  const isAuthRequired = !noAuthPages.includes(to.name)
+
+  if (isAuthRequired && !isLoggedIn) {
+    Swal.fire({
+      icon: 'error',
+      title: '비정상적인 접근',
+      text: '다시 시도해주세요.'
+    })
+    next({ name: 'login' })
+  } else {
+    next()
+  }
+
+  if (!isAuthRequired && isLoggedIn) {
+    next({ name: 'movie' })
+  }
 })
 
 export default router
