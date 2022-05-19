@@ -19,7 +19,7 @@ class Movie(models.Model):
     genre_ids = models.ManyToManyField(Genre, related_name='genres')
     backdrop_path = models.CharField(max_length=200)
 class Review(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')
     rate = models.IntegerField()

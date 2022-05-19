@@ -8,7 +8,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 
 
 from .models import Genre, Movie, Review
-from .serializers import MovieSummarySerializer, MovieDetailSerializer
+from .serializers import MovieSummarySerializer, MovieDetailSerializer, ReviewSerializer
 
 import random
 
@@ -65,28 +65,33 @@ def movie_detail(request, moviePk):
 def review_create(request, moviePk):
     user = request.user
     movie = get_object_or_404(Movie, pk=moviePk)
-    
-    serializer = CommentSerializer(data=request.data)
+    serializer = ReviewSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(movie=movie, user=user)
-
-        # 기존 serializer 가 return 되면, 단일 comment 만 응답으로 받게됨.
-        # 사용자가 댓글을 입력하는 사이에 업데이트된 comment 확인 불가 => 업데이트된 전체 목록 return 
-        comments = movie.comments.all()
-        serializer = CommentSerializer(comments, many=True)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
-    rate = models.IntegerField()
-    content = models.TextField()
-
+        reviews = movie.reviews.all()
+        serializer = ReviewSerializer(reviews, many=True)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['POST','DELETE'])
-def review_like_or_delete(request):
+def review_like_or_delete(request, moviePk, reviewPk):
+    movie = get_object_or_404(Movie, pk=moviePk)
+    review = get_object_or_404(Review, pk=reviewPk)
+    user = request.user 
+
     def like_review():
-        pass
+        if review.like_users.filter(pk=request.user.pk).exists():
+            review.like_users.remove(user)
+        else:
+            review.like_users.add(user)
+        serializer = ReviewSerializer(review, many=True)
+        return Response(serializer.data)
+
     def delete_review():
-        pass
+        if user == review.user:
+            review.delete()
+            reviews = movie.reviews.all()
+            serializer = ReviewSerializer(reviews, many=True)
+            return Response(serializer.data)
 
     if request.method == 'POST':
         return like_review()
