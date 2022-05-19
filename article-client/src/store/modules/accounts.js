@@ -1,6 +1,6 @@
 import router from '@/router'
 import axios from 'axios'
-import drf from '@/api/index.js'
+import api from '@/api/index.js'
 import Swal from 'sweetalert2'
 
 export default {
@@ -36,7 +36,7 @@ export default {
 
     login({ commit, dispatch }, credentials) {
       axios({
-        url: drf.accounts.login(),
+        url: api.accounts.login(),
         method: 'post',
         data: credentials
       })
@@ -59,7 +59,7 @@ export default {
 
     signup({ commit, dispatch }, credentials) {
       axios({
-        url: drf.accounts.signup(),
+        url: api.accounts.signup(),
         method: 'post',
         data: credentials
       })
@@ -82,7 +82,7 @@ export default {
 
     logout({ getters, dispatch }) {
       axios({
-        url: drf.accounts.logout(),
+        url: api.accounts.logout(),
         method: 'post',
         headers: getters.authHeader,
       })
@@ -103,7 +103,7 @@ export default {
     fetchCurrentUser({ commit, getters, dispatch }) {
       if (getters.isLoggedIn) {
         axios({
-          url: drf.accounts.currentUserInfo(),
+          url: api.accounts.currentUserInfo(),
           method: 'get',
           headers: getters.authHeader,
         })
@@ -119,7 +119,7 @@ export default {
 
     fetchProfile({ commit, getters }, { username }) {
       axios({
-        url: drf.accounts.profile(username),
+        url: api.accounts.profile(username),
         method: 'get',
         headers: getters.authHeader,
       })

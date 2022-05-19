@@ -1,19 +1,25 @@
 <template>
   <div>
     <p>모든 카드 보여주기</p>
-    <MovieCard/>
+    <MovieList/>
   </div>
 </template>
 
 <script>
-import MovieCard from '@/components/MovieCard.vue'
+import MovieList from '@/components/MovieList.vue'
 
 
 export default {
   name: 'MovieView',
   components: {
-    MovieCard,
+    MovieList,
   },
+  created() {
+    this.$store.dispatch('clearMovies')
+  },
+  mounted() {
+    this.$store.dispatch('fetchMovies')
+  }
 }
 </script>
 
