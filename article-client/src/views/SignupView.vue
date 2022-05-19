@@ -1,19 +1,22 @@
 <template>
   <div>
     <p>Signup!</p>
-    <form @submit.prevent="onSubmit">
+
+    <account-error-list v-if="authError"></account-error-list>
+
+    <form @submit.prevent="signup(credentials)">
       <div class="flex flex-col">
         <div class="flex justify-between mb-5">
           <div class="flex flex-col">
-            <p>ID</p><input type="text" name="username" v-model="signupInfo.username">
+            <p>ID</p><input type="text" name="username" v-model="credentials.username">
           </div>
           <div class="flex flex-col">
-            <p>nickname</p><input type="text" name="nickname" v-model="signupInfo.nickname">
+            <p>nickname</p><input type="text" name="nickname" v-model="credentials.nickname">
           </div>
         </div>
-        <p>email</p><input type="email" name="email" v-model="signupInfo.email">
-        <p>password1</p><input type="password" name="password1" v-model="signupInfo.password1">
-        <p>password2</p><input type="password" name="password2" v-model="signupInfo.password2">
+        <p>email</p><input type="email" name="email" v-model="credentials.email">
+        <p>password1</p><input type="password" name="password1" v-model="credentials.password1">
+        <p>password2</p><input type="password" name="password2" v-model="credentials.password2">
         <button>회원가입</button>
       </div>
     </form>
@@ -21,30 +24,30 @@
 </template>
 
 <script>
-import { signup } from '@/api/index.js'
+import { mapActions, mapGetters } from 'vuex'
+import AccountErrorList from '@/components/AccountErrorList.vue'
 
 export default {
   name: 'SignupView',
+  components: {
+    AccountErrorList,
+  },
   data() {
     return {
-      signupInfo: {
+      credentials: {
         username: '',
         nickname: '',
+        email: '',
         password1: '',
         password2: '',
-        email: '',
-      },
+      }
     }
   },
+  computed: {
+    ...mapGetters(['authError'])
+  },
   methods: {
-    async onSubmit() {
-      try {
-        await signup(this.signupInfo)
-        this.$router.push('/login')
-      } catch(err) {
-        alert(`문제가 발생했씁니다. ${err} 관리자에게 문의해주세요.`)
-      }
-    },
+    ...mapActions(['signup'])
   },
 }
 </script>
