@@ -8,7 +8,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 
 
 from .models import Genre, Movie, Review
-from .serializers import MovieSummarySerializer
+from .serializers import MovieSummarySerializer, MovieDetailSerializer
 
 import random
 
@@ -20,8 +20,28 @@ def movie_list(request):
     serializer = MovieSummarySerializer(movies, many=True)
     return Response(serializer.data)
 
-def mymovie_list(request):
-    pass
+@api_view(['POST','DELETE'])
+def mymovie_create_or_delete(request):
+    moviePk = request.GET.get('moviePk')
+    movie = get_object_or_404(Movie, pk=moviePk)
+    user = request.user
+
+    def create_mymovie():
+        movie.user.add(user)
+        mymovies = Movie.objects.filter(user=user)
+        serializer = MovieSummarySerializer(mymovies)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def delete_mymovie():
+        movie.user.remove(user)
+        mymovies = Movie.objects.filter(user=user)
+        serializer = MovieSummarySerializer(mymovies)
+        return Response(serializer.data, status=status.HTTP_205_RESET_CONTENT)
+
+    if request.method == 'POST':
+        return create_mymovie()
+    elif request.method == 'DELETE':
+        return delete_mymovie()
 
 def movie_recommends(request):
     pass
@@ -29,14 +49,18 @@ def movie_recommends(request):
 def movie_search(request):
     pass
 
-def movie_detail(request):
-    pass
+@api_view(['GET'])
+def movie_detail(request,moviePk):
+    movie = get_object_or_404(Movie, pk=moviePk)
+    serializer = MovieDetailSerializer(movie)
+    return Response(serializer.data)
 
 def review_create(request):
     pass
 
 def review_management(request):
     pass
+
 
 
 # 참고 사항 json 보내는 2가지 방법
