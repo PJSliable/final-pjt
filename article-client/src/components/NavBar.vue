@@ -1,25 +1,65 @@
 <template>
-  <nav class="">
-    <div class="mt-5 border-solid border-2 border-sky-400">
-      <div class="title">
-        <p>🥇Recommend Movie</p>
-      </div>
-    </div>
-    <div class="mt-5 flex justify-between">
-      <div clss="flex items-center">
-        <router-link v-if="isLoggedIn" :to="{ name: 'movie' }">movie</router-link>
-        <router-link v-if="isLoggedIn" :to="{ name: 'community' }">Community</router-link>
-        <router-link v-if="isLoggedIn" :to="{ name: 'profile', params: { username } }"> 내 프로필</router-link>
-        <router-link v-else :to="{ name: 'home' }">Home</router-link>
-      </div>
-      <div class="accounts">
-        <div v-if="isLoggedIn">
-          <router-link :to="{ name: 'logout' }">Logout</router-link>
-        </div>
-        <div v-else>
-          <router-link :to="{ name: 'login'}">Login</router-link>
-          <router-link :to="{ name: 'signup' }">Signup</router-link>
-        </div>
+  <nav
+    class="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-900 text-gray-200 shadow-lg navbar navbar-expand-lg navbar-light"
+  >
+    <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+      <button
+        class="navbar-toggler text-gray-200 border-0 hover:shadow-none hover:no-underline py-2 px-2.5 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent1"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="fas"
+          data-icon="bars"
+          class="w-6"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+        >
+          <path
+            fill="currentColor"
+            d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+          ></path>
+        </svg>
+      </button>
+      <div class="collapse navbar-collapse flex-grow items-center" id="navbarSupportedContent1">
+        <a v-if="isLoggedIn" class="text-xl text-white pr-2 font-semibold" href="#">Navbar</a>
+        <router-link v-else class="nav-link text-xl text-white pr-2 font-semibold"  :to="{ name: 'home' }">Navbar</router-link>
+        <!-- Left links -->
+        <ul class="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
+          <li class="nav-item p-2">
+            <router-link class="nav-link" v-if="isLoggedIn" :to="{ name: 'movie' }">Movie</router-link>
+          </li>
+          <li v-if="isLoggedIn" class="nav-item p-2">
+            <router-link :to="{ name: 'community' }"
+              class="nav-link"
+              >Community</router-link>
+          </li>
+          <li v-if="isLoggedIn" class="nav-item p-2">
+            <router-link :to="{ name: 'profile', params: { username } }"
+              class="nav-link"
+              > 내 프로필</router-link>
+          </li>
+        </ul>
+
+
+
+
+        <ul class="navbar-nav flex flex-col pr-0 list-style-none mr-0">
+          <li class="nav-item p-2">
+            <router-link v-if="isLoggedIn" class="nav-link" :to="{ name: 'logout' }">Logout</router-link>
+            <router-link v-else class="nav-link" :to="{ name: 'login'}">Login</router-link>
+          </li>
+          <li v-if="!isLoggedIn" class="nav-item p-2">
+            <router-link :to="{ name: 'signup' }">Signup</router-link>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -49,12 +89,18 @@ nav {
   font-size: 50px;
 }
 
-nav a {
+nav a.router-link {
   font-weight: bold;
   color: #6e2583;
-  padding: 10px 30px;
-  border: 2px solid rgb(92, 44, 44);
-  border-radius: 5%;
+  opacity: 60;
+}
+
+nav a hover {
+  opacity: 80;
+}
+
+nav a focus {
+  opacity: 80;
 }
 
 nav a.router-link-exact-active {
