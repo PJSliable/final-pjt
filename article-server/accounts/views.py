@@ -19,8 +19,6 @@ def profile(request, username):
 def signup():
     pass
     
-
-
 def login():
     pass
 
@@ -31,9 +29,6 @@ def update():
     pass
 
 def change_password():
-    pass
-
-def signup():
     pass
 
 def signup():

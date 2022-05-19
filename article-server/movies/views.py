@@ -14,28 +14,30 @@ import random
 
 @api_view(['GET'])
 def movie_list(request):
-    # 랜덤 장르 3개, 장르별 영화 10개
+    # 랜덤 장르 3개, 장르별 영화 24개
     genre_id = request.GET.get('genre_id')
-    movies = random.sample(Movie.objects.filter(genre_ids=genre_id), 10)
+    # movies = random.sample(Movie.objects.filter(genre_ids=genre_id), 24)
+    # movies = Movie.objects.order_by('-vote_average')[:24]
+    movies = Movie.objects.order_by('?')[:24]
     serializer = MovieSummarySerializer(movies, many=True)
     return Response(serializer.data)
 
 @api_view(['POST','DELETE'])
 def mymovie_create_or_delete(request):
-    moviePk = request.GET.get('moviePk')
-    movie = get_object_or_404(Movie, pk=moviePk)
+    movie_pk = request.GET.get('moviePk')
+    movie = get_object_or_404(Movie, pk=movie_pk)
     user = request.user
 
     def create_mymovie():
         movie.user.add(user)
-        mymovies = Movie.objects.filter(user=user)
-        serializer = MovieSummarySerializer(mymovies)
+        my_movies = Movie.objects.filter(user=user)
+        serializer = MovieSummarySerializer(my_movies)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def delete_mymovie():
         movie.user.remove(user)
-        mymovies = Movie.objects.filter(user=user)
-        serializer = MovieSummarySerializer(mymovies)
+        my_movies = Movie.objects.filter(user=user)
+        serializer = MovieSummarySerializer(my_movies)
         return Response(serializer.data, status=status.HTTP_205_RESET_CONTENT)
 
     if request.method == 'POST':
@@ -46,21 +48,50 @@ def mymovie_create_or_delete(request):
 def movie_recommends(request):
     pass
 
+@api_view(['GET'])
 def movie_search(request):
-    pass
+    search_input = request.GET.get('searchInput')
+    search_output = Movie.objects.filter(title__contains=search_input)
+    serializer = MovieSummarySerializer(search_output)
+    return Response(serializer.data)
 
 @api_view(['GET'])
-def movie_detail(request,moviePk):
+def movie_detail(request, moviePk):
     movie = get_object_or_404(Movie, pk=moviePk)
     serializer = MovieDetailSerializer(movie)
     return Response(serializer.data)
 
-def review_create(request):
-    pass
+@api_view(['POST'])
+def review_create(request, moviePk):
+    user = request.user
+    movie = get_object_or_404(Movie, pk=moviePk)
+    
+    serializer = CommentSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(movie=movie, user=user)
 
-def review_management(request):
-    pass
+        # 기존 serializer 가 return 되면, 단일 comment 만 응답으로 받게됨.
+        # 사용자가 댓글을 입력하는 사이에 업데이트된 comment 확인 불가 => 업데이트된 전체 목록 return 
+        comments = movie.comments.all()
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
+    rate = models.IntegerField()
+    content = models.TextField()
+
+
+@api_view(['POST','DELETE'])
+def review_like_or_delete(request):
+    def like_review():
+        pass
+    def delete_review():
+        pass
+
+    if request.method == 'POST':
+        return like_review()
+    elif request.method == 'DELETE':
+        return delete_review()
 
 
 # 참고 사항 json 보내는 2가지 방법
