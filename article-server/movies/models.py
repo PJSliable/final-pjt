@@ -7,7 +7,7 @@ class Genre(models.Model):
 
 # Create your models here.
 class Movie(models.Model):
-    user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='my_movies', null=True)
+    user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='my_movies')
 
     title = models.CharField(max_length=100)
     release_date = models.DateField(null=True)

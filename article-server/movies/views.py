@@ -8,19 +8,17 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 
 
 from .models import Genre, Movie, Review
-# from .serializers import MovieListSerializer
+from .serializers import MovieSummarySerializer
 
 import random
 
 @api_view(['GET'])
 def movie_list(request):
     # 랜덤 장르 3개, 장르별 영화 10개
-    # genres = Genre.objects.all()
-    # random_genre = random.sample(genres, 3)
-    
-    # serializer = MovieListSerializer(random_genre, many=True)
-    # return Response(serializer.data)
-    pass
+    genre_id = request.GET.get('genre_id')
+    movies = random.sample(Movie.objects.filter(genre_ids=genre_id), 10)
+    serializer = MovieSummarySerializer(movies, many=True)
+    return Response(serializer.data)
 
 def mymovie_list(request):
     pass
