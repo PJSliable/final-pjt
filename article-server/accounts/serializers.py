@@ -1,9 +1,11 @@
 from rest_framework import serializers
 from dj_rest_auth.registration.serializers import RegisterSerializer
+from movies.serializers import MovieSummarySerializer, MyReviewSerializer
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 class CustomRegisterSerializer(RegisterSerializer):
-    # 기본 설정 필드: username, password, email
     # 추가 설정 필드: nickname
     nickname = serializers.CharField(max_length=30)
 
@@ -11,3 +13,10 @@ class CustomRegisterSerializer(RegisterSerializer):
         data = super().get_cleaned_data()
         data['nickname'] = self.validated_data.get('nickname', '')
         return data
+
+class ProfileSerializer(serializers.ModelSerializer):
+    like_movies = MovieSummarySerializer(many=True)
+    reviews = MyReviewSerializer(many=True)
+    class Meta:
+        model = User
+        fields = ('username', 'like_movies', 'reviews', )
