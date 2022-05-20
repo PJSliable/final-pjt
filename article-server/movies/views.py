@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 
-from .models import Genre, Movie, Review
+from .models import Movie
 from .serializers import MovieSummarySerializer, MovieDetailSerializer
 
 

@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     # Custom Apps
     'accounts',
     'movies',
-
+    'community',
+    
     # Third-party packages
     'corsheaders',
 
