@@ -95,9 +95,6 @@ export default {
           })
           router.push({ name: 'login' })
         })
-        .error(err => {
-          console.error(err.response)
-        })
     },
 
     fetchCurrentUser({ commit, getters, dispatch }) {

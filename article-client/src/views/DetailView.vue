@@ -16,7 +16,6 @@
       </div>
       <div>
         <p>댓글 목록</p>
-        <p>{{ movie.user }}</p>
         <p>{{ movie.reviews }}</p>
       </div>
     </div>
