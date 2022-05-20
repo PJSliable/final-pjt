@@ -7,6 +7,8 @@ const PROFILE_URL = 'accounts/profile/'
 
 const MOVIES_URL = 'movies/'
 
+const REVIEWS_URL = 'community/'
+
 export default {
   accounts: {
     login: () => API_BASE_URL + LOGIN_URL,
@@ -15,14 +17,14 @@ export default {
     currentUserInfo: () => API_BASE_URL + USER_URL,
     profile: username => API_BASE_URL +PROFILE_URL + username,
   },
-  // articles: {
-  //   articles: () => HOST + ARTICLES,
-  //   article: articlePk => HOST + ARTICLES + `${articlePk}/`,
+  reviews: {
+    reviews: () => API_BASE_URL + REVIEWS_URL,
+    review: reviewPk => API_BASE_URL + REVIEWS_URL + `${reviewPk}/`,
   //   likeArticle: articlePk => HOST + ARTICLES + `${articlePk}/` + 'like/',
   //   comments: articlePk => HOST + ARTICLES + `${articlePk}/` + COMMENTS,
   //   comment: (articlePk, commentPk) =>
   //     HOST + ARTICLES + `${articlePk}/` + COMMENTS + `${commentPk}/`,
-  // },
+  },
   movies: {
     movies: () => API_BASE_URL + MOVIES_URL,
     movieDetail: moviePk =>API_BASE_URL + MOVIES_URL + moviePk,
