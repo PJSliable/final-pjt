@@ -13,9 +13,6 @@ from .serializers import ReviewSerializer, CommentSerializer
 
 @api_view(['GET','POST'])
 def review_list_or_create(request):
-    moviePk = request.GET.get('moviePk')
-    user = request.user
-    movie = get_object_or_404(Movie, pk=moviePk)
 
     def review_list():
         reviews = Review.objects.all()
@@ -23,11 +20,17 @@ def review_list_or_create(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create_review():
+        movie_pk = request.POST.get('moviePk')
+        user = request.user
+        movie = get_object_or_404(Movie, pk=movie_pk)
+
+        serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(movie=movie, user=user)
             reviews = movie.reviews.all()
             serializer = ReviewSerializer(reviews, many=True)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     if request.method == 'GET':
         return review_list()
@@ -37,8 +40,6 @@ def review_list_or_create(request):
 
 @api_view(['GET', 'POST', 'PATCH', 'DELETE'])
 def review_detail_like_or_update_delete(request, reviewPk):
-    moviePk = request.GET.get('moviePk')
-    movie = get_object_or_404(Movie, pk=moviePk)
     review = get_object_or_404(Review, pk=reviewPk)
     user = request.user 
 
@@ -55,34 +56,37 @@ def review_detail_like_or_update_delete(request, reviewPk):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def update_review():
-        if request.user == review.user:
-            serializer = ReviewSerializer(instance=review, data=request.data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
+        serializer = ReviewSerializer(instance=review, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete_review():
-        if user == review.user:
-            review.delete()
-            reviews = movie.reviews.all()
-            serializer = ReviewSerializer(reviews, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+        review.delete()
+        movie_pk = request.GET.get('moviePk') # DELETE 요청 해결해야함.
+        movie = get_object_or_404(Movie, pk=movie_pk)
+        reviews = movie.reviews.all()
+        serializer = ReviewSerializer(reviews, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     if request.method == 'GET':
         return review_detail()
     elif request.method == 'POST':
         return like_review()
     elif request.method == 'PATCH':
-        return update_review()
+        if user == review.user:
+            return update_review()
     elif request.method == 'DELETE':
-        return delete_review()
+        if user == review.user:
+            return delete_review()
 
 
 @api_view(['POST'])
 def create_comment(request):
-    reviewPk = request.GET.get('reviewPk')
+    review_pk = request.POST.get('reviewPk')
     user = request.user
-    review = get_object_or_404(Review, pk=reviewPk)
+    review = get_object_or_404(Review, pk=review_pk)
     serializer = CommentSerializer(data=request.data)
 
     if serializer.is_valid(raise_exception=True):
@@ -90,12 +94,13 @@ def create_comment(request):
         comments = review.comments.all()
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])
 def comment_delete(request, commentPk):
-    reviewPk = request.GET.get('reviewPk')
-    review = get_object_or_404(Review, pk=reviewPk)
+    review_pk = request.GET.get('reviewPk') # DELETE 요청 해결해야함.
+    review = get_object_or_404(Review, pk=review_pk)
     comment = get_object_or_404(Comment, pk=commentPk)
 
     if request.user == comment.user:

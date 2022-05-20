@@ -14,23 +14,26 @@ from .serializers import MovieSummarySerializer, MovieDetailSerializer
 def movie_list(request):
     # 랜덤 장르 3개, 장르별 영화 24개
     genre_id = request.GET.get('genre_id')
-    movies = Movie.objects.order_by('?')[:24]
+    movies = Movie.objects.filter(genre_ids=genre_id).order_by('?')[:24]
     serializer = MovieSummarySerializer(movies, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST','DELETE'])
 def mymovie_create_or_delete(request):
-    movie_pk = request.GET.get('moviePk')
-    movie = get_object_or_404(Movie, pk=movie_pk)
-    user = request.user
 
     def create_mymovie():
+        movie_pk = request.POST.get('moviePk')
+        movie = get_object_or_404(Movie, pk=movie_pk)
+        user = request.user
         movie.user.add(user)
         my_movies = Movie.objects.filter(user=user)
         serializer = MovieSummarySerializer(my_movies)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def delete_mymovie():
+        movie_pk = request.POST.get('moviePk') # DELETE 요청 해결해야함.
+        movie = get_object_or_404(Movie, pk=movie_pk)
+        user = request.user
         movie.user.remove(user)
         my_movies = Movie.objects.filter(user=user)
         serializer = MovieSummarySerializer(my_movies)
@@ -56,8 +59,6 @@ def movie_detail(request, moviePk):
     movie = get_object_or_404(Movie, pk=moviePk)
     serializer = MovieDetailSerializer(movie)
     return Response(serializer.data, status=status.HTTP_200_OK)
-
-
 
 
 # 참고 사항 json 보내는 2가지 방법
