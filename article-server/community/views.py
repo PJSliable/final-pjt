@@ -6,12 +6,14 @@ from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 
-from ..movies.models import Genre, Movie
+from movies.models import Genre, Movie
 from .models import Review, Comment
 from .serializers import ReviewSerializer, CommentSerializer
 
 def review_list():
-    pass
+    reviews = Review.objects.all()
+    serializer = ReviewSerializer(reviews, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 # Create your views here.
 @api_view(['POST'])
@@ -31,7 +33,6 @@ def review_detail_like_or_update_delete(request, moviePk, reviewPk):
     review = get_object_or_404(Review, pk=reviewPk)
     user = request.user 
 
-
     def review_detail():
         pass
 
@@ -41,7 +42,7 @@ def review_detail_like_or_update_delete(request, moviePk, reviewPk):
         else:
             review.like_users.add(user)
         serializer = ReviewSerializer(review, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def update_review():
         pass
@@ -51,7 +52,7 @@ def review_detail_like_or_update_delete(request, moviePk, reviewPk):
             review.delete()
             reviews = movie.reviews.all()
             serializer = ReviewSerializer(reviews, many=True)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
     if request.method == 'GET':
         return review_detail()
@@ -75,7 +76,7 @@ def create_comment(request, article_pk):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view([ 'DELETE'])
+@api_view(['DELETE'])
 def comment_delete(request, article_pk, comment_pk):
     review = get_object_or_404(Review, pk=article_pk)
     comment = get_object_or_404(Comment, pk=comment_pk)
@@ -85,7 +86,7 @@ def comment_delete(request, article_pk, comment_pk):
             comment.delete()
             comments = review.comments.all()
             serializer = CommentSerializer(comments, many=True)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
     
     if request.method == 'DELETE':
         return delete_comment()

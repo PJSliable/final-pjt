@@ -16,7 +16,7 @@ def movie_list(request):
     genre_id = request.GET.get('genre_id')
     movies = Movie.objects.order_by('?')[:24]
     serializer = MovieSummarySerializer(movies, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST','DELETE'])
 def mymovie_create_or_delete(request):
@@ -34,7 +34,7 @@ def mymovie_create_or_delete(request):
         movie.user.remove(user)
         my_movies = Movie.objects.filter(user=user)
         serializer = MovieSummarySerializer(my_movies)
-        return Response(serializer.data, status=status.HTTP_205_RESET_CONTENT)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     if request.method == 'POST':
         return create_mymovie()
@@ -49,13 +49,13 @@ def movie_search(request):
     search_input = request.GET.get('searchInput')
     search_output = Movie.objects.filter(title__contains=search_input)
     serializer = MovieSummarySerializer(search_output)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def movie_detail(request, moviePk):
     movie = get_object_or_404(Movie, pk=moviePk)
     serializer = MovieDetailSerializer(movie)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 
