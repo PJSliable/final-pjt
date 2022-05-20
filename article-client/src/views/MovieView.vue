@@ -1,6 +1,9 @@
 <template>
   <div>
     <p>모든 카드 보여주기</p>
+    <div class="flex justify-end">
+      <SearchForm/>
+    </div>
     <MovieList
       v-for="movieData in movies"
       :key="movieData.genre"
@@ -12,11 +15,13 @@
 
 <script>
 import MovieList from '@/components/MovieList.vue'
+import SearchForm from '@/components/SearchForm.vue'
 
 export default {
   name: 'MovieView',
   components: {
     MovieList,
+    SearchForm,
   },
   computed: {
     movies() {

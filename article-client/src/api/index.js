@@ -25,5 +25,6 @@ export default {
   // },
   movies: {
     movies: () => API_BASE_URL + MOVIES_URL,
+    movieDetail: moviePk =>API_BASE_URL + MOVIES_URL + moviePk,
   }
 }

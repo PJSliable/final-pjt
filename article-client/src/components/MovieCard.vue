@@ -1,12 +1,17 @@
 <template>
     <div class="my-3 w-1/4 p-5">
       <div>
-        <div class="border border-2 border-black h-full flex flex-col items-center justify-between my-3">
+        <div class="border border-2 border-black flex flex-col items-center justify-between my-3">
           <div @click="getDetail">
             <img :src="imageUrl" alt="movie image" class="w-auto" :data-movie-pk="movie.pk">
           </div>
-          <div>
-            <span class="movieTitle font-bold text-1/2 text-white">{{ movie.title }}</span>
+          <div class="flex justify-between items-center">
+            <div class="w-4/5 flex">
+              <span class="movieTitle font-bold text-1/2 text-white">{{ movie.title }}</span>
+            </div>
+            <div class="text-center">
+              <span class="font-bold text-1/2 text-white">{{ movie.vote_average }}</span>
+            </div>
           </div>
         </div>
       </div>
