@@ -3,21 +3,17 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 
 from .models import Genre, Movie, Review
-from .serializers import MovieSummarySerializer, MovieDetailSerializer, ReviewSerializer
+from .serializers import MovieSummarySerializer, MovieDetailSerializer
 
-import random
 
 @api_view(['GET'])
 def movie_list(request):
     # 랜덤 장르 3개, 장르별 영화 24개
     genre_id = request.GET.get('genre_id')
-    # movies = random.sample(Movie.objects.filter(genre_ids=genre_id), 24)
-    # movies = Movie.objects.order_by('-vote_average')[:24]
     movies = Movie.objects.order_by('?')[:24]
     serializer = MovieSummarySerializer(movies, many=True)
     return Response(serializer.data)
@@ -61,42 +57,7 @@ def movie_detail(request, moviePk):
     serializer = MovieDetailSerializer(movie)
     return Response(serializer.data)
 
-@api_view(['POST'])
-def review_create(request, moviePk):
-    user = request.user
-    movie = get_object_or_404(Movie, pk=moviePk)
-    serializer = ReviewSerializer(data=request.data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie, user=user)
-        reviews = movie.reviews.all()
-        serializer = ReviewSerializer(reviews, many=True)
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-@api_view(['POST','DELETE'])
-def review_like_or_delete(request, moviePk, reviewPk):
-    movie = get_object_or_404(Movie, pk=moviePk)
-    review = get_object_or_404(Review, pk=reviewPk)
-    user = request.user 
-
-    def like_review():
-        if review.like_users.filter(pk=request.user.pk).exists():
-            review.like_users.remove(user)
-        else:
-            review.like_users.add(user)
-        serializer = ReviewSerializer(review, many=True)
-        return Response(serializer.data)
-
-    def delete_review():
-        if user == review.user:
-            review.delete()
-            reviews = movie.reviews.all()
-            serializer = ReviewSerializer(reviews, many=True)
-            return Response(serializer.data)
-
-    if request.method == 'POST':
-        return like_review()
-    elif request.method == 'DELETE':
-        return delete_review()
 
 
 # 참고 사항 json 보내는 2가지 방법
