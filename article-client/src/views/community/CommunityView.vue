@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1>community</h1>
+    <p>community</p>
     <ReviewList/>
   </div>
 </template>
 
 <script>
-import ReviewList from '@/components/ReviewList.vue'
+import ReviewList from '@/components/community/ReviewList.vue'
 
 export default {
   name: 'CommunityView',

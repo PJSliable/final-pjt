@@ -2,16 +2,21 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
 
-import SignupView from '@/views/SignupView.vue'
-import LoginView from '@/views/LoginView.vue'
-import LogoutView from '@/views/LogoutView.vue'
-import ProfileView from '@/views/ProfileView.vue'
 import NotFound404 from '@/views/NotFound404.vue'
+
+import SignupView from '@/views/accounts/SignupView.vue'
+import LoginView from '@/views/accounts/LoginView.vue'
+import LogoutView from '@/views/accounts/LogoutView.vue'
+import ProfileView from '@/views/accounts/ProfileView.vue'
 
 import HomeView from '@/views/HomeView.vue'
 import MovieView from '@/views/MovieView.vue'
-import CommmunityView from '@/views/CommunityView.vue'
 import DetailView from '@/views/DetailView.vue'
+
+import CommmunityView from '@/views/community/CommunityView.vue'
+import ReviewCreateView from '@/views/community/ReviewCreateView.vue'
+import ReviewDetailView from '@/views/community/ReviewDetailView.vue'
+import ReviewEditView from '@/views/community/ReviewEditView.vue'
 
 import Swal from 'sweetalert2'
 
@@ -39,11 +44,6 @@ const routes = [
     component: ProfileView,
   },
   {
-    path: '/404',
-    name: 'NotFound404',
-    component: NotFound404
-  },
-  {
     path: '/',
     name: 'home',
     component: HomeView
@@ -54,14 +54,35 @@ const routes = [
     component: MovieView
   },
   {
+    path: '/detail/:moviePk',
+    name: 'detail',
+    component: DetailView
+  },
+  {
     path: '/community',
     name: 'community',
     component: CommmunityView
   },
   {
-    path: '/detail/:moviePk',
-    name: 'detail',
-    component: DetailView
+    path: '/community/:moviePk/create',
+    name: 'reviewCreate',
+    component: ReviewCreateView,
+    props: true,
+  },
+  {
+    path: '/community/:reviewPk',
+    name: 'reviewDetail',
+    component: ReviewDetailView
+  },
+  {
+    path: '/community/:reviewPk/edit',
+    name: 'reviewEdit',
+    component: ReviewEditView
+  },
+  {
+    path: '/404',
+    name: 'NotFound404',
+    component: NotFound404
   },
   {
     path: '*',

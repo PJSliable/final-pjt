@@ -3,12 +3,16 @@
     <div>
     <p>영화 상세 정보</p>
     <p>{{ movie }}</p>
+    <p>{{ moviePk }}</p>
     <img :src="imageUrl" alt="">
     </div>
     <div>
-      <p> 댓글 목록 </p>
+      <p> 리뷰 목록 </p>
       <div>
-        <p>댓글작성폼</p>
+        <p>리뷰작성하기</p>
+        <router-link
+          :to="{ name: 'reviewCreate', params: { moviePk: moviePk } }"
+        >Create</router-link>
       </div>
       <div>
         <p>댓글 목록</p>
@@ -23,6 +27,11 @@
 import { mapActions } from 'vuex'
 export default {
   name: 'DetailView',
+  data() {
+    return {
+      moviePk: this.$route.params.moviePk
+    }
+  },
   computed: {
     movie() {
       return this.$store.state.movies.movieDetail
