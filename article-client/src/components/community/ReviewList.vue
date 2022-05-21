@@ -6,7 +6,7 @@
         {{ review.user.username }} : 
 
         <router-link 
-          :to="{ name: 'review', params: {reviewPk: review.pk} }">
+          :to="{ name: 'reviewDetail', params: {reviewPk: review.pk} }">
           {{ review.title }}
         </router-link>
 

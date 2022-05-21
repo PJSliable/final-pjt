@@ -5,9 +5,10 @@ import api from '@/api/index.js'
 export default {
   state: {
     movies: [],
+    searchMovies: [],
     movieDetail: {},
     imageBaseUrl: "https://www.themoviedb.org/t/p/original",
-    genres: [12, 14, 16, 18, 27, 28, 35, 36, 37, 53, 80, 99, 878, 9648, 10402, 10749, 10751, 10752, 10770]
+    genres: [12, 14, 16, 18, 27, 28, 35, 36, 37, 53, 80, 99, 878, 9648, 10402, 10749, 10751, 10752, 10770],
   },
   getters: {
   },
@@ -20,6 +21,9 @@ export default {
     },
     FETCH_MOVIE_DETAIL(state, movieDetail) {
       state.movieDetail = movieDetail
+    },
+    FETCH_SEARCH_MOVIES(state, searchMovies) {
+      state.searchMovies = searchMovies
     },
   },
   actions: {
@@ -58,5 +62,22 @@ export default {
           commit('FETCH_MOVIE_DETAIL', res.data)
         })
     },
+    fetchSearchMovies({ commit }, userInput) {
+      if (!userInput) {
+        return commit('FETCH_SEARCH_MOVIES', [])
+      }
+
+      axios({
+        url: api.movies.search(),
+        method: 'get',
+        params: {
+          userInput : userInput
+        },
+      })
+        .then(res => {
+          console.log(res)
+        })
+
+    }
   },
 }

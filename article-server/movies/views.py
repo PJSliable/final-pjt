@@ -49,10 +49,11 @@ def movie_recommends(request):
 
 @api_view(['GET'])
 def movie_search(request):
-    search_input = request.GET.get('searchInput')
+    search_input = request.GET.get('userInput')
     search_output = Movie.objects.filter(title__contains=search_input)
-    serializer = MovieSummarySerializer(search_output)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    if search_output:
+        serializer = MovieSummarySerializer(search_output, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def movie_detail(request, moviePk):

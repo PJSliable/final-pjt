@@ -13,7 +13,7 @@ export default {
     reviews: state => state.reviews,
     review: state => state.review,
     isAuthor: (state, getters) => {
-      return state.review.user?.username === getters.currentUser.username
+      return state.review.user?.username === getters.currentUser.userPk
     },
     isReview: state => !_.isEmpty(state.review),
   },
@@ -32,7 +32,6 @@ export default {
         .catch(err => console.error(err.response))
     },
     createReview({ commit, getters }, review) {
-      console.log(review)
       axios({
         url: api.reviews.reviews(),
         method: 'post',

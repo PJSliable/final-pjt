@@ -1,12 +1,10 @@
 <template>
-  <div>
-    리뷰 목록
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: 'ReviewList'
+  name: 'SearchMovieList'
 }
 </script>
 
