@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
-
+from django.forms.models import model_to_dict
 
 from movies.models import Genre, Movie
 from .models import Review, Comment
@@ -48,8 +48,9 @@ def review_detail_like_or_update_delete(request, reviewPk):
     user = request.user 
 
     def review_detail():
-        serializer = ReviewSerializer(review, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        print(review.created_at)
+        obj = model_to_dict( review)
+        return Response(obj, status=status.HTTP_200_OK)
 
     def like_review():
         if review.like_users.filter(pk=request.user.pk).exists():
