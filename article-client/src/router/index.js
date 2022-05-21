@@ -67,12 +67,11 @@ const routes = [
     path: '/community/:moviePk/create',
     name: 'reviewCreate',
     component: ReviewCreateView,
-    props: true,
   },
   {
     path: '/community/:reviewPk',
     name: 'reviewDetail',
-    component: ReviewDetailView
+    component: ReviewDetailView,
   },
   {
     path: '/community/:reviewPk/edit',

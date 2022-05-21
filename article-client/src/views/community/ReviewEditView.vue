@@ -22,7 +22,7 @@ export default {
     ...mapGetters(['review', 'isReview'])
   },
   methods: {
-    ...mapActions(['fetchRevie'])
+    ...mapActions(['fetchReview'])
   },
   created() {
     this.fetchReview(this.$route.params.reviewPk)

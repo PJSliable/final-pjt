@@ -1,7 +1,9 @@
 <template>
   <div>
-    <p></p>
-    <!-- 수정 삭제 button -->
+    <p>{{ reviewPk }}번째 게시글</p>
+    <router-link :to="{ name: 'detail', params: { moviePk } }" > 영화정보 바로가기</router-link>
+    {{ review.movie }}
+    <!-- 작성자 수정 삭제 button -->
     <div v-if="isAuthor">
       <router-link :to="{ name: 'reviewEdit', params: { reviewPk } }">
         <button>Edit</button>
@@ -31,6 +33,9 @@ export default {
     ...mapGetters(['isAuthor', 'review']),
     likeCount() {
       return this.review.like_users?.length
+    },
+    moviePk() {
+      return this.$store.getters.review.movie
     },
   },
   methods: {
