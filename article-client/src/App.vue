@@ -1,6 +1,8 @@
-<template>
+<template >
   <div id="app">
-    <NavBar/>
+    <NavBar
+      class="sticky top-0"
+    />
     <hr>
     <router-view/>
   </div>

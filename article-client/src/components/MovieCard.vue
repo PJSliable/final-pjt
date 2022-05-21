@@ -7,10 +7,10 @@
           </div>
           <div class="flex justify-between items-center">
             <div class="w-4/5 flex">
-              <span class="movieTitle font-bold text-1/2 text-white">{{ movie.title }}</span>
+              <span class="movieTitle font-bold text-1/2">{{ movie.title }}</span>
             </div>
             <div class="text-center">
-              <span class="font-bold text-1/2 text-white">{{ movie.vote_average }}</span>
+              <span class="font-bold text-1/2">{{ movie.vote_average }}</span>
             </div>
           </div>
         </div>
