@@ -75,7 +75,7 @@ export default {
         },
       })
         .then(res => {
-          console.log(res)
+          commit('FETCH_SEARCH_MOVIES', res.data)
         })
 
     }
