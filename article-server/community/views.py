@@ -19,20 +19,17 @@ def review_list_or_create(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create_review():
-        movie_pk = request.data.get('moviePk')
+        movie_pk = request.data.get('movie')
         user = request.user
-        movie = get_object_or_404(Movie, pk=movie_pk)
-        print(request.data)
-        print(type(request.data.get('rate')))
         Newdata = {
             'title': request.data.get('title'),
             'content': request.data.get('content'),
             'rate': request.data.get('rate'),
+            'movie': movie_pk
         }
-        print(Newdata)
         serializer = ReviewSerializer(data=Newdata)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(movie=movie, user=user)
+            serializer.save(user=user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -45,12 +42,11 @@ def review_list_or_create(request):
 @api_view(['GET', 'POST', 'PATCH', 'DELETE'])
 def review_detail_like_or_update_delete(request, reviewPk):
     review = get_object_or_404(Review, pk=reviewPk)
-    user = request.user 
+    user = request.user
 
     def review_detail():
-        print(review.created_at)
-        obj = model_to_dict( review)
-        return Response(obj, status=status.HTTP_200_OK)
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def like_review():
         if review.like_users.filter(pk=request.user.pk).exists():
