@@ -32,6 +32,7 @@ export default {
         .catch(err => console.error(err.response))
     },
     createReview({ commit, getters }, review) {
+      console.log(review)
       axios({
         url: api.reviews.reviews(),
         method: 'post',
