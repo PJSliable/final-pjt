@@ -13,22 +13,26 @@ from .serializers import ReviewSerializer, CommentSerializer
 
 @api_view(['GET','POST'])
 def review_list_or_create(request):
-
     def review_list():
         reviews = Review.objects.all()
         serializer = ReviewSerializer(reviews, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create_review():
-        movie_pk = request.POST.get('moviePk')
+        movie_pk = request.data.get('moviePk')
         user = request.user
         movie = get_object_or_404(Movie, pk=movie_pk)
-
-        serializer = ReviewSerializer(data=request.data)
+        print(request.data)
+        print(type(request.data.get('rate')))
+        Newdata = {
+            'title': request.data.get('title'),
+            'content': request.data.get('content'),
+            'rate': request.data.get('rate'),
+        }
+        print(Newdata)
+        serializer = ReviewSerializer(data=Newdata)
         if serializer.is_valid(raise_exception=True):
             serializer.save(movie=movie, user=user)
-            reviews = movie.reviews.all()
-            serializer = ReviewSerializer(reviews, many=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
