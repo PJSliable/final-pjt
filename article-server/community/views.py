@@ -42,7 +42,8 @@ def review_list_or_create(request):
 @api_view(['GET', 'POST', 'PATCH', 'DELETE'])
 def review_detail_like_or_update_delete(request, reviewPk):
     review = get_object_or_404(Review, pk=reviewPk)
-    user = request.user
+    if request.user:
+        user = request.user
 
     def review_detail():
         serializer = ReviewSerializer(review)
@@ -65,11 +66,7 @@ def review_detail_like_or_update_delete(request, reviewPk):
 
     def delete_review():
         review.delete()
-        movie_pk = request.GET.get('moviePk') # DELETE 요청 해결해야함.
-        movie = get_object_or_404(Movie, pk=movie_pk)
-        reviews = movie.reviews.all()
-        serializer = ReviewSerializer(reviews, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     if request.method == 'GET':
         return review_detail()

@@ -13,7 +13,7 @@ export default {
     reviews: state => state.reviews,
     review: state => state.review,
     isAuthor: (state, getters) => {
-      return state.review.user?.username === getters.currentUser.userPk
+      return state.review.user?.pk === getters.currentUser.pk
     },
     isReview: state => !_.isEmpty(state.review),
   },
@@ -60,7 +60,9 @@ export default {
         }
       })
     },
-    updateReview({ commit, getters }, review, reviewPk) {
+    updateReview({ commit, getters }, data) {
+      const review = data.review
+      const reviewPk = data.reviewPk
       axios({
         url: api.reviews.review(reviewPk),
         method: 'patch',
