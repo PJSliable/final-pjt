@@ -25,7 +25,7 @@
       >조아여</button>
     </div> -->
     <p>{{ likeCount }}</p>
-    
+    <p>{{ review.comments }}</p>
     <CommentList
       :comments="review.comments"
     />

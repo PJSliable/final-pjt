@@ -47,10 +47,14 @@ export default {
       } else if (this.action === 'update') {
         const payload = {
           pk: this.review.pk,
-          movie: this.review.moviePk,
+          movie: this.review.movie,
           ...this.newReview
         }
-        this.updateReview(payload, this.review.pk)
+        const data = {
+          review: payload,
+          reviewPk: this.review.pk
+        }
+        this.updateReview(data)
       }
     }
   }
