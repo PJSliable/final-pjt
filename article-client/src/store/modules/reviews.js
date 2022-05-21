@@ -20,11 +20,12 @@ export default {
   mutations: {
     SET_REVIEWS: (state, reviews) => state.reviews = reviews,
     SET_REVIEW: (state, review) => state.review = review,
+    SET_REVIEW_COMMENTS: (state, comments) => (state.review.comments = comments),
   },
   actions: {
     fetchReviews({ commit, getters }) {
       axios({
-        url: api.reviews.reviews(),
+        url: api.community.reviews(),
         method: 'get',
         headers: getters.authHeader,
       })
@@ -33,7 +34,7 @@ export default {
     },
     createReview({ commit, getters }, review) {
       axios({
-        url: api.reviews.reviews(),
+        url: api.community.reviews(),
         method: 'post',
         data: review,
         headers: getters.authHeader,
@@ -48,7 +49,7 @@ export default {
     },
     fetchReview({ commit, getters }, reviewPk) {
       axios({
-        url: api.reviews.review(reviewPk),
+        url: api.community.review(reviewPk),
         method: 'get',
         headers: getters.authHeader,
       })
@@ -64,7 +65,7 @@ export default {
       const review = data.review
       const reviewPk = data.reviewPk
       axios({
-        url: api.reviews.review(reviewPk),
+        url: api.community.review(reviewPk),
         method: 'patch',
         data: review,
         headers: getters.authHeader,
@@ -91,7 +92,7 @@ export default {
         .then((result) => {
           if (result.value) {
             axios({
-              url: api.reviews.review(reviewPk),
+              url: api.community.review(reviewPk),
               method: 'delete',
               headers: getters.authHeader,
             })
@@ -103,5 +104,51 @@ export default {
           }
         })
     },
+    createComment({ commit, getters }, { reviewPk, content }) {
+      const comment = { content }
+      axios({
+        url: api.community.comment(),
+        method: 'post',
+        data: {
+          reviewPk,
+          comment
+        },
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('SET_REVIEW_COMMENTS', res.data)
+        })
+        .catch(err => console.error(err.response))
+    },
+
+    // updateComment({ commit, getters }, { articlePk, commentPk, content }) {
+    //   const comment = { content }
+
+    //   axios({
+    //     url: drf.articles.comment(articlePk, commentPk),
+    //     method: 'put',
+    //     data: comment,
+    //     headers: getters.authHeader,
+    //   })
+    //     .then(res => {
+    //       commit('SET_ARTICLE_COMMENTS', res.data)
+    //     })
+    //     .catch(err => console.error(err.response))
+    // },
+
+    // deleteComment({ commit, getters }, { articlePk, commentPk }) {
+    //     if (confirm('정말 삭제하시겠습니까?')) {
+    //       axios({
+    //         url: drf.articles.comment(articlePk, commentPk),
+    //         method: 'delete',
+    //         data: {},
+    //         headers: getters.authHeader,
+    //       })
+    //         .then(res => {
+    //           commit('SET_ARTICLE_COMMENTS', res.data)
+    //         })
+    //         .catch(err => console.error(err.response))
+    //     }
+    //   },
   },
 }
