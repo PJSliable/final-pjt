@@ -1,4 +1,5 @@
 const API_BASE_URL = 'http://localhost:8000/'
+
 const LOGIN_URL = 'accounts/login/'
 const SIGNUP_URL = 'accounts/signup/'
 const LOGOUT_URL = 'accounts/logout/'
@@ -8,7 +9,8 @@ const PROFILE_URL = 'accounts/profile/'
 const MOVIES_URL = 'movies/'
 const SEARCH_URL = 'movies/search'
 
-const REVIEWS_URL = 'community/'
+const COMMUNITY_URL = 'community/'
+const COMMENT_URL = 'comment/'
 
 export default {
   accounts: {
@@ -18,11 +20,11 @@ export default {
     currentUserInfo: () => API_BASE_URL + USER_URL,
     profile: username => API_BASE_URL +PROFILE_URL + username,
   },
-  reviews: {
-    reviews: () => API_BASE_URL + REVIEWS_URL,
-    review: reviewPk => API_BASE_URL + REVIEWS_URL + `${reviewPk}/`,
+  community: {
+    reviews: () => API_BASE_URL + COMMUNITY_URL,
+    review: reviewPk => API_BASE_URL + COMMUNITY_URL + `${reviewPk}/`,
   //   likeArticle: articlePk => HOST + ARTICLES + `${articlePk}/` + 'like/',
-  //   comments: articlePk => HOST + ARTICLES + `${articlePk}/` + COMMENTS,
+    comment: () => API_BASE_URL + COMMUNITY_URL + COMMENT_URL,
   //   comment: (articlePk, commentPk) =>
   //     HOST + ARTICLES + `${articlePk}/` + COMMENTS + `${commentPk}/`,
   },

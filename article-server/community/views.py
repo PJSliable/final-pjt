@@ -82,10 +82,12 @@ def review_detail_like_or_update_delete(request, reviewPk):
 
 @api_view(['POST'])
 def create_comment(request):
-    review_pk = request.POST.get('reviewPk')
+    print(request.data)
+    review_pk = request.data.get('reviewPk')
+    print(review_pk)
     user = request.user
     review = get_object_or_404(Review, pk=review_pk)
-    serializer = CommentSerializer(data=request.data)
+    serializer = CommentSerializer(data=request.data.get('comment'))
 
     if serializer.is_valid(raise_exception=True):
         serializer.save(review=review, user=user)
