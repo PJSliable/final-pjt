@@ -105,6 +105,9 @@ export default {
         },
         headers: getters.authHeader,
       })
+        .then((res) => {
+          console.log(moviePk, res)
+        })
     }
   },
 }

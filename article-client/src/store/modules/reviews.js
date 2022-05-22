@@ -164,5 +164,14 @@ export default {
           }
         })
     },
+    likeReview({ commit, getters }, reviewPk) {
+      axios({
+        url: api.community.review(reviewPk),
+        method: 'post',
+        headers: getters.authHeader,
+      })
+        .then(res => commit('SET_REVIEW', res.data))
+        .catch(err => console.error(err.response))
+    },
   }
 }

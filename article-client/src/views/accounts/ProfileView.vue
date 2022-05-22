@@ -1,9 +1,10 @@
 <template>
   <div>
-    <p>{{ profile }}</p>
-    <p>{{ profile.username }}</p>
+    <div>
+      <p class="text-4xl"><span class="font-bold">{{ profile.username }}</span>님의 프로필!!</p>
+    </div>
     <MyMovieList/>
-    <MyReviewList/>
+    <MyReviewList :profile="profile"/>
 
   </div>
 </template>

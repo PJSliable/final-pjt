@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>{{ reviewPk }}번째 게시글</p>
-    <router-link :to="{ name: 'detail', params: { moviePk } }" > 영화정보 바로가기</router-link>
+    <router-link :to="{ name: 'detail', params: { moviePk: `${moviePk}` } }"> 영화정보 바로가기</router-link>
     {{ review.movie }}
     <div>
       <p>{{ review.rate }}</p>
@@ -17,13 +17,12 @@
       <button @click="deleteReview(reviewPk)">Delete</button>
     </div>
 
-<!-- 좋아요 버튼 -->
-    <!-- <div>
+    <div>
       Likeit:
-      <button
-        @click="likeArticle(articlePk)"
+      <button class="border border-black"
+        @click="likeReview(reviewPk)"
       >조아여</button>
-    </div> -->
+    </div>
     <p>{{ likeCount }}</p>
     
     <CommentList
@@ -52,14 +51,14 @@ export default {
       return this.review.like_users?.length
     },
     moviePk() {
-      return this.$store.getters.review.movie
+      return this.review.movie
     },
   },
   methods: {
     ...mapActions(['fetchReview', 'likeReview', 'deleteReview'])
   },
   created() {
-    this.fetchReview(this.reviewPk)
+    this.fetchReview(this.$route.params.reviewPk)
   },
 
 }

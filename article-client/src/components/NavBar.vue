@@ -1,8 +1,11 @@
 <template>
   <nav
-    class="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-900 text-gray-200 shadow-lg navbar navbar-expand-lg navbar-light"
+    class="relative w-full flex flex-wrap items-center justify-between  bg-gray-900 text-gray-200 shadow-lg navbar navbar-expand-lg navbar-light"
   >
     <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+      <a v-if="isLoggedIn" class="text-xl text-white pr-2 font-semibold" href="#">Navbar</a>
+      <router-link v-else class="nav-link text-xl text-white pr-2 font-semibold"  :to="{ name: 'home' }">Navbar</router-link>
+
       <button
         class="navbar-toggler text-gray-200 border-0 hover:shadow-none hover:no-underline py-2 px-2.5 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline"
         type="button"
@@ -28,9 +31,8 @@
           ></path>
         </svg>
       </button>
+      
       <div class="collapse navbar-collapse flex-grow items-center" id="navbarSupportedContent1">
-        <a v-if="isLoggedIn" class="text-xl text-white pr-2 font-semibold" href="#">Navbar</a>
-        <router-link v-else class="nav-link text-xl text-white pr-2 font-semibold"  :to="{ name: 'home' }">Navbar</router-link>
         <!-- Left links -->
         <ul class="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
           <li class="nav-item p-2">
