@@ -47,6 +47,7 @@ def review_detail_like_or_update_delete(request, reviewPk):
 
     def review_detail():
         serializer = ReviewSerializer(review)
+        print(serializer.data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def like_review():
@@ -99,7 +100,7 @@ def create_comment(request):
 
 @api_view(['DELETE'])
 def comment_delete(request, commentPk):
-    review_pk = request.GET.get('reviewPk') # DELETE 요청 해결해야함.
+    review_pk = request.data.get('reviewPk') # DELETE 요청 해결해야함.
     review = get_object_or_404(Review, pk=review_pk)
     comment = get_object_or_404(Comment, pk=commentPk)
 

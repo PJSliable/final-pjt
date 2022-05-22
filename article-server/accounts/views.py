@@ -24,8 +24,7 @@ def profile_or_delete_account(request, username):
 
     def profile():
         serializer = ProfileSerializer(user)
-        print(serializer.data)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return JsonResponse(serializer.data, status=status.HTTP_200_OK)
 
     def delete_account():
         user_nickname = request.user.nickname

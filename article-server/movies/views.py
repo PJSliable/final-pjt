@@ -31,7 +31,7 @@ def mymovie_create_or_delete(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def delete_mymovie():
-        movie_pk = request.POST.get('moviePk') # DELETE 요청 해결해야함.
+        movie_pk = request.data.get('moviePk') # DELETE 요청 해결해야함.
         movie = get_object_or_404(Movie, pk=movie_pk)
         user = request.user
         movie.user.remove(user)

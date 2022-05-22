@@ -19,7 +19,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     class ProfileMovieSerializer(serializers.ModelSerializer):
         class Meta:
             model = Movie
-            fields = ('pk','poster_path', 'title', 'vote_average',)
+            fields = ('pk', 'poster_path', 'title', 'vote_average',)
 
 
     class ProfileReviewSerializer(serializers.ModelSerializer):
@@ -32,13 +32,13 @@ class ProfileSerializer(serializers.ModelSerializer):
 
         class Meta:
             model = Review
-            fields = ('pk', 'user', 'rate', 'movie', 'title', 'content',) #  'like_users'
+            fields = ('pk', 'rate', 'movie', 'title', 'content',) #  'like_users'
 
-    # my_movies = ProfileMovieSerializer(many=True, read_only=True, )
+    my_movies = ProfileMovieSerializer(many=True, read_only=True, )
     reviews = ProfileReviewSerializer(many=True, read_only=True, )
     class Meta:
         model = get_user_model()
-        fields = ('username',  'reviews', ) # 'nickname','my_movies',
+        fields = ('username', 'my_movies', 'reviews', ) # 'nickname',
 
 
 
