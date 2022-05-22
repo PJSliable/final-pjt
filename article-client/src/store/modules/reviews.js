@@ -137,22 +137,32 @@ export default {
     // },
 
     deleteComment({ commit, getters }, { commentPk, reviewPk }) {
-        if (confirm('정말 삭제하시겠습니까?')) {
-          axios({
-            url: api.community.comments(commentPk),
-            method: 'delete',
-            data: {
-              reviewPk
-            },
-            headers: getters.authHeader,
-          })
-            .then(res => {
-              console.log(res)
-              console.log(res.data)
-              commit('SET_REVIEW_COMMENTS', res.data)
+      Swal.fire({
+        title: '댓글 삭제하실?',
+        text: "하쉴?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '삭제',
+        cancelButtonText: '취소'
+      })
+        .then((result) => {
+          if (result.value) {
+            axios({
+              url: api.community.comments(commentPk),
+              method: 'delete',
+              data: {
+                reviewPk
+              },
+              headers: getters.authHeader,
             })
-            .catch(err => console.error(err.response))
-        }
-      },
-  },
+              .then(res => {
+                commit('SET_REVIEW_COMMENTS', res.data)
+              })
+              .catch(err => console.error(err.response))
+          }
+        })
+    },
+  }
 }
