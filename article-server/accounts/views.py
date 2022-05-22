@@ -28,16 +28,14 @@ def profile_or_delete_account(request, username):
 
     def delete_account():
         user_nickname = request.user.nickname
-        print(1)
         user.delete()
         return JsonResponse({'message': '{} accounts were deleted successfully!'.format(user_nickname)}, status=status.HTTP_204_NO_CONTENT)
 
     if request.method == 'GET':
-        profile()
+        return profile()
     elif request.method == 'DELETE':
         if user == request.user:
-            delete_account()
-
+            return delete_account()
 
 @api_view(['POST'])
 def update(request):

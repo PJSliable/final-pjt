@@ -101,9 +101,8 @@ def create_comment(request):
 @api_view(['DELETE'])
 def comment_delete(request, commentPk):
     review_pk = request.data.get('reviewPk') # DELETE 요청 해결해야함.
-    review = get_object_or_404(Review, pk=review_pk)
     comment = get_object_or_404(Comment, pk=commentPk)
-
+    review = get_object_or_404(Review, pk=review_pk)
     if request.user == comment.user:
         comment.delete()
         comments = review.comments.all()
