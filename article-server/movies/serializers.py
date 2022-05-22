@@ -30,4 +30,3 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         model = Movie
         fields = ('pk', 'poster_path', 'title', 'vote_average','release_date', 'backdrop_path', 'genre_ids', 'overview', 'reviews')
 
-
