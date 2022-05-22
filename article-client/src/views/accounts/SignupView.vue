@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Signup!</p>
+    <p class="title">Signup!</p>
 
     <account-error-list v-if="authError"></account-error-list>
 

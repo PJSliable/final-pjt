@@ -1,34 +1,26 @@
 <template>
   <div>
-    <p>게시글 목록</p>
-    <ul>
-      <li v-for="review in reviews" :key="review.pk">
-        {{ review.user.username }} : 
-
-        <router-link 
-          :to="{ name: 'reviewDetail', params: {reviewPk: review.pk} }">
-          {{ review.title }}
-        </router-link>
-
-        ({{ review.comment_count }}) | +{{ review.like_count }}
-      </li>
-    </ul>
+    <ReviewItem
+      v-for="review in reviews"
+      :key="review.pk"
+      :review="review"
+    />
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import ReviewItem from '@/components/community/ReviewItem.vue'
 
 export default {
   name: 'ReviewList',
-  computed: {
-    ...mapGetters(['reviews'])
+  components: {
+    ReviewItem,
   },
-  methods: {
-    ...mapActions(['fetchReviews'])
-  },
-  created() {
-    this.fetchReviews()
+  props: {
+    reviews: {
+      type: Array,
+      required: true,
+    },
   },
 }
 </script>

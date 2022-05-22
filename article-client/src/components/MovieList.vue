@@ -6,6 +6,7 @@
         v-for="(movie, index) in movieList"
         :key="index"
         :movie="movie"
+        :isLiked="false"
       />
     </div>
 

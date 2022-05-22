@@ -4,7 +4,9 @@
     <p>영화 상세 정보</p>
     <p>{{ movie }}</p>
     <p>{{ moviePk }}</p>
-    <img :src="imageUrl" alt="">
+    <div v-if="this.movie.backdrop_path">
+      <img :src="imageUrl" alt="">
+    </div>
     </div>
     <div>
       <p> 리뷰 목록 </p>
