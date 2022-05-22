@@ -18,7 +18,7 @@ export default {
     logout: () => API_BASE_URL + LOGOUT_URL,
     signup: () => API_BASE_URL + SIGNUP_URL,
     currentUserInfo: () => API_BASE_URL + USER_URL,
-    profile: username => API_BASE_URL +PROFILE_URL + username,
+    profile: username => API_BASE_URL + PROFILE_URL + username,
   },
   community: {
     reviews: () => API_BASE_URL + COMMUNITY_URL,
@@ -30,7 +30,7 @@ export default {
   },
   movies: {
     movies: () => API_BASE_URL + MOVIES_URL,
-    movieDetail: moviePk =>API_BASE_URL + MOVIES_URL + moviePk,
+    movieDetail: moviePk =>API_BASE_URL + MOVIES_URL + `${moviePk}/`,
     search: () => API_BASE_URL + SEARCH_URL
   }
 }
