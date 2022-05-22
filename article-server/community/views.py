@@ -55,7 +55,7 @@ def review_detail_like_or_update_delete(request, reviewPk):
             review.like_users.remove(user)
         else:
             review.like_users.add(user)
-        serializer = ReviewSerializer(review, many=True)
+        serializer = ReviewSerializer(review)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def update_review():
