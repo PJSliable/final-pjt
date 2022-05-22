@@ -28,6 +28,6 @@ class MovieDetailSerializer(serializers.ModelSerializer):
     reviews = ReviewListSerializer(many=True)
     class Meta:
         model = Movie
-        fields = ('poster_path', 'title', 'vote_average','release_date', 'backdrop_path', 'genre_ids', 'overview', 'reviews')
+        fields = ('pk', 'poster_path', 'title', 'vote_average','release_date', 'backdrop_path', 'genre_ids', 'overview', 'reviews')
 
 

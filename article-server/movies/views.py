@@ -15,34 +15,23 @@ def movie_list(request):
     # 랜덤 장르 3개, 장르별 영화 24개
     genre_id = request.GET.get('genre_id')
     movies = Movie.objects.filter(genre_ids=genre_id).order_by('?')[:24]
+    # mymovie인 경우에 제외하기 
     serializer = MovieSummarySerializer(movies, many=True)
+
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-@api_view(['POST','DELETE'])
+@api_view(['POST'])
 def mymovie_create_or_delete(request):
-
-    def create_mymovie():
-        movie_pk = request.POST.get('moviePk')
-        movie = get_object_or_404(Movie, pk=movie_pk)
-        user = request.user
-        movie.user.add(user)
-        my_movies = Movie.objects.filter(user=user)
-        serializer = MovieSummarySerializer(my_movies)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def delete_mymovie():
-        movie_pk = request.data.get('moviePk') # DELETE 요청 해결해야함.
-        movie = get_object_or_404(Movie, pk=movie_pk)
-        user = request.user
+    movie_pk = request.data.get('moviePk')
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    user = request.user
+    if movie.user.filter(pk=user.pk).exists():
         movie.user.remove(user)
-        my_movies = Movie.objects.filter(user=user)
-        serializer = MovieSummarySerializer(my_movies)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    if request.method == 'POST':
-        return create_mymovie()
-    elif request.method == 'DELETE':
-        return delete_mymovie()
+    else:
+        movie.user.add(user)
+    my_movies = user.my_movies.all()
+    serializer = MovieSummarySerializer(my_movies, many=True)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 def movie_recommends(request):
     pass
@@ -59,6 +48,7 @@ def movie_search(request):
 def movie_detail(request, moviePk):
     movie = get_object_or_404(Movie, pk=moviePk)
     serializer = MovieDetailSerializer(movie)
+    print(serializer.data)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
