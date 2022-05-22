@@ -77,7 +77,16 @@ export default {
         .then(res => {
           commit('FETCH_SEARCH_MOVIES', res.data)
         })
-
+    },
+    likeMovie({ getters }, moviePk) {
+      axios({
+        url: api.movies.like(),
+        method: 'post',
+        data: {
+          moviePk
+        },
+        headers: getters.authHeader,
+      })
     }
   },
 }

@@ -2,16 +2,24 @@
   <div>
     <p>{{ profile }}</p>
     <p>{{ profile.username }}</p>
+    <MyMovieList/>
+    <MyReviewList/>
 
   </div>
 </template>
 
 <script>
+import MyMovieList from '@/components/profile/MyMovieList.vue'
+import MyReviewList from '@/components/profile/MyReviewList.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 
 export default {
   name: 'ProfileView',
+  components: {
+    MyMovieList,
+    MyReviewList,
+  },
   computed: {
     ...mapGetters(['profile'])
   },
