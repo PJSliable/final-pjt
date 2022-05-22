@@ -136,19 +136,23 @@ export default {
     //     .catch(err => console.error(err.response))
     // },
 
-    // deleteComment({ commit, getters }, { articlePk, commentPk }) {
-    //     if (confirm('정말 삭제하시겠습니까?')) {
-    //       axios({
-    //         url: drf.articles.comment(articlePk, commentPk),
-    //         method: 'delete',
-    //         data: {},
-    //         headers: getters.authHeader,
-    //       })
-    //         .then(res => {
-    //           commit('SET_ARTICLE_COMMENTS', res.data)
-    //         })
-    //         .catch(err => console.error(err.response))
-    //     }
-    //   },
+    deleteComment({ commit, getters }, { commentPk, reviewPk }) {
+        if (confirm('정말 삭제하시겠습니까?')) {
+          axios({
+            url: api.community.comments(commentPk),
+            method: 'delete',
+            data: {
+              reviewPk
+            },
+            headers: getters.authHeader,
+          })
+            .then(res => {
+              console.log(res)
+              console.log(res.data)
+              commit('SET_REVIEW_COMMENTS', res.data)
+            })
+            .catch(err => console.error(err.response))
+        }
+      },
   },
 }

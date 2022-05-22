@@ -24,9 +24,8 @@ export default {
     reviews: () => API_BASE_URL + COMMUNITY_URL,
     review: reviewPk => API_BASE_URL + COMMUNITY_URL + `${reviewPk}/`,
   //   likeArticle: articlePk => HOST + ARTICLES + `${articlePk}/` + 'like/',
+    comments: commentPk => API_BASE_URL + COMMUNITY_URL + COMMENT_URL + `${commentPk}/`,
     comment: () => API_BASE_URL + COMMUNITY_URL + COMMENT_URL,
-  //   comment: (articlePk, commentPk) =>
-  //     HOST + ARTICLES + `${articlePk}/` + COMMENTS + `${commentPk}/`,
   },
   movies: {
     movies: () => API_BASE_URL + MOVIES_URL,
