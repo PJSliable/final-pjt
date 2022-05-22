@@ -59,7 +59,15 @@ def review_detail_like_or_update_delete(request, reviewPk):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def update_review():
-        serializer = ReviewSerializer(instance=review, data=request.data)
+        movie_pk = request.data.get('movie')
+        user = request.user
+        Newdata = {
+            'title': request.data.get('title'),
+            'content': request.data.get('content'),
+            'rate': request.data.get('rate'),
+            'movie': movie_pk
+        }
+        serializer = ReviewSerializer(instance=review, data=Newdata)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -83,9 +91,7 @@ def review_detail_like_or_update_delete(request, reviewPk):
 
 @api_view(['POST'])
 def create_comment(request):
-    print(request.data)
     review_pk = request.data.get('reviewPk')
-    print(review_pk)
     user = request.user
     review = get_object_or_404(Review, pk=review_pk)
     serializer = CommentSerializer(data=request.data.get('comment'))
@@ -98,13 +104,32 @@ def create_comment(request):
     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['DELETE'])
-def comment_delete(request, commentPk):
-    review_pk = request.data.get('reviewPk') # DELETE 요청 해결해야함.
+@api_view(['DELETE','PATCH'])
+def comment_update_or_delete(request, commentPk):
+    review_pk = request.data.get('reviewPk') 
     comment = get_object_or_404(Comment, pk=commentPk)
     review = get_object_or_404(Review, pk=review_pk)
-    if request.user == comment.user:
-        comment.delete()
-        comments = review.comments.all()
-        serializer = CommentSerializer(comments, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    user = request.user
+
+    def update_comment():
+        serializer = CommentSerializer(instance=comment, data=request.data.get('comment'))
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(review=review, user=user)
+            comments = review.comments.all()
+            serializer = CommentSerializer(comments, many=True)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    def comment_delete():
+        if request.user == comment.user:
+            comment.delete()
+            comments = review.comments.all()
+            serializer = CommentSerializer(comments, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+    if request.method == 'PATCH':
+        if user == review.user:
+            return update_comment()
+    elif request.method == 'DELETE':
+        if user == review.user:
+            return comment_delete()
