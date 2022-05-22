@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from movies.models import Movie
 from community.models import Review
 
+
 class CustomRegisterSerializer(RegisterSerializer):
     # 추가 설정 필드: nickname
     nickname = serializers.CharField(max_length=30)
