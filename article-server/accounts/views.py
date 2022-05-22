@@ -24,10 +24,11 @@ def profile_or_delete_account(request, username):
 
     def profile():
         serializer = ProfileSerializer(user)
-        return JsonResponse(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def delete_account():
         user_nickname = request.user.nickname
+        print(1)
         user.delete()
         return JsonResponse({'message': '{} accounts were deleted successfully!'.format(user_nickname)}, status=status.HTTP_204_NO_CONTENT)
 
