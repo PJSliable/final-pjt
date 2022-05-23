@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="p-10 flex justify-between">
-      <div class="text-4xl font-bold">
+    <div class=" flex flex-col md:flex-row  md:justify-between">
+      <div class="p-10 text-2xl md:text-4xl font-bold">
         <div v-if="isObjEmpty">
           <p>검색하쉴?</p>
         </div>

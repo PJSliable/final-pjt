@@ -44,7 +44,7 @@
 
         <ul class="navbar-nav flex flex-col pr-0 list-style-none mr-0">
           <li class="nav-item p-2">
-            <router-link v-if="isLoggedIn" :to="{ name: 'profile', params: { username } }" class="nav-link">{{ username }}님 안녕하세용!</router-link>
+            <router-link v-if="isLoggedIn" :to="{ name: 'profile', params: { username } }" class="nav-link">{{ username }}님 프로필</router-link>
             <router-link v-else class="nav-link" :to="{ name: 'login'}">Login</router-link>
           </li>
           <li class="nav-item p-2">
