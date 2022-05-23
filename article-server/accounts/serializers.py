@@ -21,7 +21,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True, read_only=True)
     class Meta:
         model = get_user_model()
-        fields = ('username', 'my_movies', 'reviews', ) # 'nickname',
+        fields = ('username', 'my_movies', 'reviews','nickname', )
 
 
 
