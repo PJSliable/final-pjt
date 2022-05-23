@@ -5,7 +5,7 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         # 기본 저장 필드: first_name, last_name, username, email
         user = super().save_user(request, user, form, False)
         # 추가 저장 필드: nickname
-        nickname = data.get("profile_image")
+        nickname = data.get("nickname")
         if nickname:
             user.nickname = nickname
         user.save()

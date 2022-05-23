@@ -8,7 +8,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 
 from .models import Movie
 from .serializers import MovieSummarySerializer, MovieDetailSerializer
-
+from django.db.models import Avg
 
 @api_view(['GET'])
 def movie_list(request):
@@ -36,67 +36,93 @@ def mymovie_create_or_delete(request):
 
 
 
-
-# 자신이 평점을 3점 이상으로 리뷰를 단 영화들의 목록과 장르를 받는다. 
-# 해당 영화들을 마찬가지로 3점 이상으로 평가한 유저들의 목록을 뽑아 해당 유저들이 3점 이상으로 평가한 영화들을 파악하고
-# 0.3*vote_average/2 + 0.7*rate 로 별도의 점수를 만들어서 높은 순으로 출력한다. 총점 3점 이상이여야 함.
-# 만약 이런 방식의 추천 영화의 개수가 24 미만이라면 3점 이상으로 평가한 영화들의 장르를 파악하고 해당 장르에서의 추천 영화로 추가해준다.
-# 만약 이런 방식으로도 24개를 못채운다면
 @api_view(['GET'])
 def movie_recommends(request):
     user = request.user
+    # 자신이 평점을 3점 이상으로 부여한 리뷰 리스트를 불러온다.
     reviews = user.reviews.filter(rate__gte=3)
-    genre_list = []
-    for review in reviews:
-        now_genres = review.movie.genre_ids
-        for now_genre in now_genres:
-            if now_genre not in genre_list:
-                genre_list.append(now_genre)
-    ## 여기까지 완료함.
-    
+    if user.reviews.filter(rate__gte=3).exists:
+        movie_list = []
+        genre_list = []
+        for review in reviews:
+            # 해당 리뷰가 어떤 영화의 리뷰인지 저장한다.
+            if review.movie not in movie_list:
+                movie_list.append(review.movie)
+            # 해당 리뷰의 영화가 어떤 장르인지 저장한다.
+            now_genres = review.movie.genre_ids.all()
+            for now_genre in now_genres:
+                if now_genre not in genre_list:
+                    genre_list.append(now_genre)
+
     user_list = []
-    # 각 영화마다 해당 영화를 좋아하는 유저들의 목록을 받아와 저장한다.
-    for my_movie in my_movies:
-        now_users = my_movie.like_users.all()
-        for now_user in now_users:
-            # 유저 중복 제거
-            if now_user not in user_list:
-                user_list.append(now_user)
-    # 본인 제거
-    user_list.remove(user)
-    
-    # 해당 유저들이 좋아하는 영화들을 가져와 저장한다.
+    # 해당 영화들을 
+    for movie in movie_list:
+        # 3점 이상으로 평가한 리뷰를 뽑고
+        reviews = movie.reviews.filter(rate__gte=3)
+        for review in reviews:
+            # 해당 리뷰를 작성한 유저를 뽑는다.
+            if review.user not in user_list:
+                user_list.append(review.user)
+
+    # 그 유저들이 3점 이상으로 평가한 영화들의 전체 목록을 뽑고
     recommended_movies = []
-    for movie_like_user in user_list:
-        now_movies = Movie.objects.filter(like_users=movie_like_user.pk)
-        for now_movie in now_movies:
-            # 영화 중복 제거
-            if now_movie not in recommended_movies:
-                recommended_movies.append(now_movie)
-    # 자신이 본 영화 제거
-    for my_movie in my_movies:
-        if my_movie in recommended_movies:
-            recommended_movies.remove(my_movie)
-    # 영화를 평점을 기준으로 정렬 (상위 평점 순으로 정렬하여 추천)
-    recommended_movies.sort(key=lambda x : -x.vote_average)
-	# 영화 개수가 10개를 초과하지 않게 제한
-    recommended_movies = recommended_movies[:10]
-    # 만약에 영화의 개수가 10개보다 적다면 그냥 전체 영화에서 평점 상위 10개의 목록을 가져와 순서대로 빈 자리만큼 채워주기
-    add_movies = Movie.objects.order_by('-vote_average')[:10]
-    for add_movie in add_movies:
-        # 개수가 10개가 될 때 break
-        if len(recommended_movies) >= 10:
-            break
-        if add_movie not in recommended_movies:
-            recommended_movies.append(add_movie)
+    for user in user_list:
+        reviews = user.reviews.filter(rate__gte=3)
+        for review in reviews:
+            movie = review.movie
+            if movie not in recommended_movies:
+                recommended_movies.append(movie)
 
-    context = {
-        'recommended_movies': recommended_movies,
-    }
-    return JsonResponse(request, 'movies/recommended.html', context)
+    # 해당 유저가 리뷰를 단 영화 & 내 영화 리스트에 추가한 영화 제거
+    # - 유저 닉네임 반영이 안되어 여러명 회원가입이 안되어 체크하지 못함. 이후에 반영할 것.
+    # user = request.user
+    # reviews = user.reviews.all()
+    # for review in reviews:
+    #     if review.movie in recommended_movies:
+    #         recommended_movies.remove(review.movie)
+    # movies = user.my_movies.all()
+    # for movie in movies:
+    #     recommended_movies.remove(movie)
+
+    # 24개로 제한
+    recommended_movies = recommended_movies[:24]
+
+    def list_to_queryset(model, data):
+        from django.db.models.base import ModelBase
+        if not isinstance(model, ModelBase):
+            raise ValueError(
+                "%s must be Model" % model
+            )
+        if not isinstance(data, list):
+            raise ValueError(
+                "%s must be List Object" % data
+            )
+        pk_list = [obj.pk for obj in data]
+        return model.objects.filter(pk__in=pk_list)
+
+    recommended_movies = list_to_queryset(Movie, recommended_movies)
+
+    # 영화 목록
+    # Field Lookup Django
+    # Movie.objects.filter('어떤 조건').annotate(rate_average=Avg('reviews__rank'))
+    recommended_movies = recommended_movies.annotate(rate_average=Avg('reviews__rate'))
+
+    recommended_movies = list(recommended_movies)
+    
+    # # 0.3*vote_average/2 + 0.7*rate 로 별도의 점수를 만들어서 높은 순으로 출력한다. 
+    recommended_movies.sort(key=lambda x : -(0.3*x.vote_average + 0.7*x.rate_average))
 
 
+    # 만약 이런 방식의 추천 영화의 개수가 24 미만이라면 
+    # (3점 이상으로 평가한 영화들의 장르)에서의 추천 영화로 추가해준다.
 
+
+    # order check
+    # for recommended_movie in recommended_movies:
+    #     print(0.3*recommended_movie.vote_average+ 0.7*recommended_movie.rate_average)
+
+    serializer = MovieSummarySerializer(recommended_movies, many=True)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 
