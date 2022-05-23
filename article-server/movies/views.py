@@ -120,7 +120,12 @@ def movie_recommends(request):
         else:
             genre_list = Genre.objects.all()
             now_genre = random.sample(genre_list, 1)[0]
-        genre_recommended_movies = now_genre.genres.filter().order_by('-vote_average')[:need_number]
+
+        user = request.user
+        reviews = user.reviews.all()
+        my_movies = user.my_movies.all()
+        # 중복 제거 & 투표순 정렬 
+        genre_recommended_movies = now_genre.genres.filter(~Q(pk__in=my_movies) & ~Q(reviews__in=reviews)).order_by('-vote_average')[:need_number]
         recommended_movies.extend(list(genre_recommended_movies))
 
 
