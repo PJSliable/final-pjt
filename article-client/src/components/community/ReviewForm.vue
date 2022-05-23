@@ -3,7 +3,7 @@
     <p>{{this.$route.params.moviePk}}</p>
     <div>
       <label for="title">title: </label>
-      <input v-model="newReview.title" type="text" id="title" />
+      <input v-model="newReview.title" class="border" type="text" id="title" />
     </div>
     <div>
       <label for="content">contnet: </label>
@@ -62,5 +62,7 @@ export default {
 </script>
 
 <style scoped>
-
+p {
+  font-size: 100px;
+}
 </style>
