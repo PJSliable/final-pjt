@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div class="flex flex-wrap">
+    <div class="w-full h-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 place-content-center">
       <MovieCard
         v-for="(movie, index) in movieList"
         :key="index"
         :movie="movie"
+        :isLiked="false"
       />
     </div>
   </div>
