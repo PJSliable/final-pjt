@@ -1,14 +1,26 @@
 <template>
   <div>
-    <p>모든 카드 보여주기</p>
-    <div class="flex justify-end">
-      <SearchForm/>
+    <div class=" flex flex-col md:flex-row  md:justify-between">
+      <div class="p-10 text-2xl md:text-4xl font-bold">
+        <div v-if="isObjEmpty">
+          <p>검색하쉴?</p>
+        </div>
+        <div v-else>
+          <p>영화보쉴?</p>
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <SearchForm/>
+      </div>
     </div>
     <div v-if="isObjEmpty">
-      검색영화
+      
       <SearchMovieList/>
     </div>
     <div v-else>
+      <div >
+        
+      </div>
       <MovieList
         v-for="movieData in movies"
         :key="movieData.genre"

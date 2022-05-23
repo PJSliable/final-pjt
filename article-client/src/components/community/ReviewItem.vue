@@ -1,14 +1,18 @@
 <template>
-  <div>
-    {{ review.user.username }} : 
-
-    <router-link 
-      :to="{ name: 'reviewDetail', params: {reviewPk: review.pk} }">
-      {{ review.title }}
-    </router-link>
-
-    ({{ commentCount }}) | +{{ likeCount }}
-  </div>
+  <tr>
+    <td>
+      {{ review.user.username }}
+    </td>
+    <td>
+      <router-link 
+        :to="{ name: 'reviewDetail', params: {reviewPk: review.pk} }">
+        {{ review.title }}
+      </router-link>
+    </td>
+    <td>
+    ({{ commentCount }}) | {{ likeCount }}
+    </td>
+  </tr>
 </template>
 
 <script>

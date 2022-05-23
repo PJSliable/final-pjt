@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p>community</p>
-    <div>
+    <p class="flex text-4xl font-bold p-10">댓글쓰쉴?</p>
+    <div class="flex flex-col w-2/3">
       <p>전체 리뷰 목록</p>
       <ReviewList
         :reviews="reviews"

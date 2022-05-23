@@ -1,9 +1,10 @@
 <template>
   <nav
-    class="relative w-full flex flex-wrap items-center justify-between  bg-gray-900 text-gray-200 shadow-lg navbar navbar-expand-lg navbar-light"
+    class="w-full border-b-2 border-white flex flex-wrap items-center justify-between bg-[#ea6fd5] shadow-lg navbar navbar-expand-lg navbar-light"
   >
-    <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
-      <a v-if="isLoggedIn" class="text-xl text-white pr-2 font-semibold" href="#">Navbar</a>
+    <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6 text-l text-white pr-2 font-semibold">
+      <!-- 로고로 변경 필-->
+      <router-link v-if="isLoggedIn" class="text-xl text-white pr-2 font-semibold" :to="{ name: 'movie' }">Navbar</router-link>
       <router-link v-else class="nav-link text-xl text-white pr-2 font-semibold"  :to="{ name: 'home' }">Navbar</router-link>
 
       <button
@@ -33,7 +34,6 @@
       </button>
       
       <div class="collapse navbar-collapse flex-grow items-center" id="navbarSupportedContent1">
-        <!-- Left links -->
         <ul class="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
           <li class="nav-item p-2">
             <router-link class="nav-link" v-if="isLoggedIn" :to="{ name: 'movie' }">Movie</router-link>
@@ -43,12 +43,9 @@
           </li>
         </ul>
 
-
-
-
         <ul class="navbar-nav flex flex-col pr-0 list-style-none mr-0">
           <li class="nav-item p-2">
-            <router-link v-if="isLoggedIn" :to="{ name: 'profile', params: { username } }" class="nav-link">{{ username }}님 안녕하세용!</router-link>
+            <router-link v-if="isLoggedIn" :to="{ name: 'profile', params: { username } }" class="nav-link">{{ username }}님 프로필</router-link>
             <router-link v-else class="nav-link" :to="{ name: 'login'}">Login</router-link>
           </li>
           <li class="nav-item p-2">
@@ -80,26 +77,16 @@ nav {
   padding: 30px;
 }
 
-.title p {
-  font-weight: bold;
-  font-size: 50px;
-}
-
 nav a.router-link {
-  font-weight: bold;
-  color: #6e2583;
-  opacity: 60;
+  color: #923c92;
 }
 
-nav a hover {
-  opacity: 80;
-}
-
-nav a focus {
-  opacity: 80;
+nav a:hover{
+  color: #CCCCCC
 }
 
 nav a.router-link-exact-active {
-  color: #b439ed;
+  font-weight: bold;
+  color: black;
 }
 </style>

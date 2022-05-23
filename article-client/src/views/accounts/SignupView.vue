@@ -1,25 +1,39 @@
 <template>
-  <div>
-    <p class="title">Signup!</p>
+<div class="flex justify-center top-1/2 items-center" style="margin-top: 100px">
+    <div class="border-2 border-black bg-white rounded-lg p-5">
+      <p class="font-extrabold p-5">회원가입</p>
 
-    <account-error-list v-if="authError"></account-error-list>
+      <account-error-list v-if="authError"></account-error-list>
 
-    <form @submit.prevent="signup(credentials)">
-      <div class="flex flex-col">
-        <div class="flex justify-between mb-5">
+      <form @submit.prevent="signup(credentials)">
+      <div class="flex flex-col justify-between gap-3">
+        <div class="flex justify-between gap-3">
           <div class="flex flex-col">
-            <p>ID</p><input type="text" name="username" v-model="credentials.username">
+            <p class="self-start">아이디</p>
+            <input class="border-2 border-slate-900 text-center px-1" type="text" name="username" v-model="credentials.username">
           </div>
           <div class="flex flex-col">
-            <p>nickname</p><input type="text" name="nickname" v-model="credentials.nickname">
+            <p class="self-start">별명</p>
+            <input class="border-2 border-slate-900 text-center px-1" type="text" name="nickname" v-model="credentials.nickname">
           </div>
         </div>
-        <p>email</p><input type="email" name="email" v-model="credentials.email">
-        <p>password1</p><input type="password" name="password1" v-model="credentials.password1">
-        <p>password2</p><input type="password" name="password2" v-model="credentials.password2">
-        <button>회원가입</button>
+        <div class="flex flex-col">
+          <p class="self-start">이메일</p>
+          <input class="border-2 border-slate-900 text-center px-1" type="email" name="email" v-model="credentials.email">
+        </div>
+        <div class="flex flex-col">
+          <p class="self-start">비밀번호</p>
+          <input class="border-2 border-slate-900 text-center px-1" type="password" name="password1" v-model="credentials.password1">
+        </div>
+        <div class="flex flex-col">
+          <p class="self-start">비밀번호 확인</p>
+          <input class="border-2 border-slate-900 text-center px-1" type="password" name="password2" v-model="credentials.password2"> 
+        </div>
+        <br>
+        <button class="px-10 py-1 bg-orange-400">회원가입</button>
       </div>
     </form>
+    </div>
   </div>
 </template>
 
@@ -53,7 +67,4 @@ export default {
 </script>
 
 <style scoped>
-input {
-  border: 1px solid black;
-}
 </style>

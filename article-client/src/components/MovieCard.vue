@@ -1,24 +1,24 @@
 <template>
-    <div class="my-3 w-1/4 p-5">
-      <div>
-        <div class="border border-2 border-black flex flex-col my-3">
-          <div @click="getDetail">
-            <img :src="imageUrl" alt="movie image" class="w-auto" :data-movie-pk="movie.pk">
+    <div class="h-full w-full flex justify-center my-5">
+      <div class="shadow-lg shadow-slate-900 rounded-lg h-max w-4/5 bg-white flex flex-col justify-between relative">
+        <div @click="getDetail" class="cardImg border-2 border-b-black">
+          <img :src="imageUrl" alt="movie image" class="w-full rounded-t-md" :data-movie-pk="movie.pk" style="width:100%; height: 246px;">
+        </div>
+        <div class="flex flex-col justify-evenly" style="width: 100%; height: 100px;">
+          <div class="flex justify-end mx-2">
+            <form @submit.prevent="clickLike" :data-movie-pk="movie.pk" >
+              <button  class="border-2 border-black px-2" >
+                <span v-if="likestate">시러용</span>
+                <span v-else>조아용</span>
+              </button>
+            </form>
           </div>
-          <div class="flex flex-col w-full">
-            <div class="flex items-center justify-between">
-              <form @submit.prevent="clickLike" :data-movie-pk="movie.pk">
-                <button  class="border-2 border-black px-2" >
-                  <span v-if="likestate">시러용</span>
-                  <span v-else>조아용</span>
-                </button>
-              </form>
-              <span class="font-bold text-1/2">{{ movie.vote_average }}</span>
-            </div>
-            <div>
-              <span class="movieTitle font-bold text-1/2">{{ movie.title }}</span>
-            </div>
+          <div class="" >
+            <p class="font-bold text-sm">{{ movie.title }}</p>
           </div>
+        </div>
+        <div class="rounded-full p-2 font-bold text-white text-1/5 absolute left-1 top-1 bg-slate-700" style="width:40px; height:40px;">
+          <span>{{ movie.vote_average }}</span>
         </div>
       </div>
     </div>
@@ -68,5 +68,13 @@ export default {
 </script>
 
 <style scoped>
+.cardImg img {
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
 
+.cardImg img:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
 </style>

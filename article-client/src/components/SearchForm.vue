@@ -1,11 +1,14 @@
 <template>
-  <form @submit.prevent>
+  <form @submit.prevent class="relative z-0">
     <input
       type="text"
-      class="border border-slate-500 rounded-sm w-full p-2"
+      class="border border-slate-500 rounded-lg w-full p-2 px-14"
       placeholder="검색하장"
       @input="onSearchDebounce"
       >
+    <div class="align-center absolute top-1 left-2">
+      <span class="align-middle border-r-2 border-slate-300 text-3xl">🔍</span>
+    </div>
   </form>
 </template>
 
