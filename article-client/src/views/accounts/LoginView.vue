@@ -1,14 +1,23 @@
 <template>
-  <div class="h-screen">
-    <p class="font-extrabold mt-5">Login</p>
+  <div class="flex justify-center top-1/2 items-center" style="margin-top: 100px">
+    <div class="border-2 border-black bg-white rounded-lg p-5">
+      <p class="font-extrabold p-5">Login</p>
 
-    <account-error-list v-if="authError"></account-error-list>
+      <account-error-list v-if="authError"></account-error-list>
 
-    <form @submit.prevent="login(credentials)">
-      <p>ID</p><input class="border-2 border-slate-900" type="text" name="username" v-model="credentials.username" required>
-      <p>password</p><input class="border-2 border-slate-900" type="password" name="password" v-model="credentials.password" required>
-      <button>Login</button>
-    </form>
+      <form @submit.prevent="login(credentials)" class="mt-5">
+        <div class="flex flex-col justify-between gap-3">
+          <p class="self-start">아이디</p>
+          <input class="border-2 border-slate-900 text-center px-1" type="text" name="username" v-model="credentials.username" required>
+        </div>
+        <br>
+        <div class="flex flex-col justify-between gap-3">
+          <p class="self-start">비밀번호</p><input class="border-2 border-slate-900" type="password" name="password" v-model="credentials.password" required>
+        </div>
+        <br>
+        <button class="px-10 py-1 bg-orange-400">로그인</button>
+      </form>
+    </div>
   </div>
 </template>
 

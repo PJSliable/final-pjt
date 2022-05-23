@@ -1,7 +1,7 @@
 <template >
   <div id="app">
     <NavBar
-      class="sticky top-0"
+      class="sticky top-0 z-50"
     />
     <hr>
     <router-view/>
