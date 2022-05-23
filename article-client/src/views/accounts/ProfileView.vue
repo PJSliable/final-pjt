@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <p class="text-4xl"><span class="font-bold">{{ profile.username }}</span>님의 프로필!!</p>
+      <span class="text-4xl font-bold">{{ profile.username }}</span>
     </div>
     <MyMovieList/>
     <MyReviewList :profile="profile"/>

@@ -1,7 +1,7 @@
 <template>
     <div class="h-full w-full flex justify-center my-5">
       <div class="shadow-lg shadow-slate-900 rounded-lg h-max w-4/5 bg-white flex flex-col justify-between relative">
-        <div @click="getDetail" class="border-2 border-b-black">
+        <div @click="getDetail" class="cardImg border-2 border-b-black">
           <img :src="imageUrl" alt="movie image" class="w-full rounded-t-md" :data-movie-pk="movie.pk" style="width:100%; height: 246px;">
         </div>
         <div class="flex flex-col justify-evenly" style="width: 100%; height: 100px;">
@@ -68,5 +68,13 @@ export default {
 </script>
 
 <style scoped>
+.cardImg img {
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
 
+.cardImg img:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
 </style>
