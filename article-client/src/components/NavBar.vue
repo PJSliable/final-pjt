@@ -3,7 +3,8 @@
     class="w-full border-b-2 border-white flex flex-wrap items-center justify-between bg-[#ea6fd5] shadow-lg navbar navbar-expand-lg navbar-light"
   >
     <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6 text-l text-white pr-2 font-semibold">
-      <a v-if="isLoggedIn" class="text-xl text-white pr-2 font-semibold" href="#">Navbar</a>
+      <!-- 로고로 변경 필-->
+      <router-link v-if="isLoggedIn" class="text-xl text-white pr-2 font-semibold" :to="{ name: 'movie' }">Navbar</router-link>
       <router-link v-else class="nav-link text-xl text-white pr-2 font-semibold"  :to="{ name: 'home' }">Navbar</router-link>
 
       <button
