@@ -30,6 +30,7 @@ def save_movie_data():
         params = {
             'api_key':'f6a4dc74497f9fa968f0457d06d75600',
             'page' : page_number,
+            'language':'ko',
         }
         print('page is', page_number)
         try:

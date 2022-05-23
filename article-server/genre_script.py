@@ -12,6 +12,7 @@ def save_genre_data():
     PATH = '/genre/movie/list'
     params = {
         'api_key':'f6a4dc74497f9fa968f0457d06d75600',
+        'language':'ko'
     }
     try:
         response = requests.get(BASE_URL+PATH, params = params)
