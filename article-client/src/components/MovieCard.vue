@@ -9,8 +9,8 @@
             <div class="flex items-center justify-between">
               <form @submit.prevent="clickLike" :data-movie-pk="movie.pk">
                 <button  class="border-2 border-black px-2" >
-                  <span  v-if="likeState">시러용</span>
-                  <span  v-else>조아용</span>
+                  <span v-if="likestate">시러용</span>
+                  <span v-else>조아용</span>
                 </button>
               </form>
               <span class="font-bold text-1/2">{{ movie.vote_average }}</span>
@@ -29,6 +29,11 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'MovieCard',
+  data() {
+    return {
+      likeState: this.isLiked
+    }
+  },
   props: {
     movie: {
       type: Object,
@@ -43,9 +48,9 @@ export default {
     imageUrl() {
       return this.$store.state.movies.imageBaseUrl + this.movie.poster_path
     },
-    likeState() {
-      return this.isLiked
-    } 
+    likestate() {
+      return this.likeState
+    },
   },
   methods: {
     ...mapActions(['likeMovie']),
@@ -56,6 +61,7 @@ export default {
     clickLike(event) {
       const moviePk = event.target.dataset.moviePk
       this.likeMovie(moviePk)
+      this.likeState = !this.likeState
     }
   }
 }
