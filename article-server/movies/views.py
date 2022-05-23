@@ -176,3 +176,6 @@ def movie_detail(request, moviePk):
 #         articles = get_list_or_404(Article)
 #         serializer = ArticleListSerializer(articles, many=True)
 #         return Response(serializer.data)
+
+
+
