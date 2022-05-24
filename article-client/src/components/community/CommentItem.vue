@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <p>{{ comment }}</p>
+  <div class="flex justify-between">
+    <p>{{ comment.user.nickname }}: {{ comment.content }}</p>
 
     <form @submit.prevent="onSubmit" class="">
       <button class="border-2">delete</button>
     </form>
-
-
   </div>
 </template>
 

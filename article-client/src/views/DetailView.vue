@@ -8,18 +8,15 @@
             <img :src="ptImgUrl" alt="posterImg" class="w-full" style="width:100%; height: 100%;">
           </div>
           <div class="col-span-2 w-full p-3">
-            <div>
-              <p class="font-bold my-3 text-xl md:text-3xl lg:text-4xl">{{ movie.title }}</p>
+            <div class="flex">
+              <p class="font-bold text-xl md:text-3xl lg:text-4xl">{{ movie.title }}</p>
             </div>
 
-            <hr>
-            <div class="my-3 text-2xl">
-              <p>평점 : {{ movie.vote_average }},  개봉일 : {{ movie.release_date }},  장르 : {{ movie.genre_ids }}</p>
-            </div>
             <div>
-              <p class="my-3 text-2xl">줄거리</p>
-              <p class="text-xl">{{ movie.overview }}</p>
+              <p>줄거리</p>
+              <p>{{ movie.overview }}</p>
             </div>
+
           </div>
         </div>
       </div>
@@ -30,29 +27,18 @@
             :to="{ name: 'reviewCreate', params: { moviePk: moviePk } }"
           >
           <button class="px-10 py-1 m-3 font-Jua bg-orange-400">리뷰작성하기</button>
-          
           </router-link>
         </div>
-      </div>
-      <div>
-        <p class="mb-3">리뷰 목록</p>
-        <ReviewList
-          :reviews="movie.reviews"
-        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ReviewList from '@/components/community/ReviewList.vue'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'DetailView',
-  components: {
-    ReviewList
-  },
   data() {
     return {
       moviePk: this.$route.params.moviePk
@@ -67,10 +53,13 @@ export default {
     },
     ptImgUrl() {
       return this.$store.state.movies.imageBaseUrl + this.movie.poster_path
-    }
+    },
   },
   methods: {
-    ...mapActions(['fetchDetail'])
+    ...mapActions(['fetchDetail']),
+    reviewClick(reviewPk) {
+      return this.$router.push({ name: 'reviewDetail', params: { reviewPk }})
+    }
   },
   created() {
     const payload = { moviePk: this.$route.params.moviePk }
