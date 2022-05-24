@@ -109,12 +109,10 @@ router.beforeEach((to, from, next) => {
       text: '다시 시도해주세요.'
     })
     next({ name: 'login' })
+  } else if (!isAuthRequired && isLoggedIn) {
+    next({ name: 'movie' })
   } else {
     next()
-  }
-
-  if (!isAuthRequired && isLoggedIn) {
-    next({ name: 'movie' })
   }
 })
 

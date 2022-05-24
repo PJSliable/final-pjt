@@ -64,7 +64,7 @@ export default {
         headers: getters.authHeader,
       })
         .then(res => {
-          commit('FETCH_SEARCH_MOVIES', res.data)
+          commit('FETCH_RECOMMEND_MOVIES', res.data)
         })
     },
     fetchMovies({ commit }) {
