@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div class=" flex flex-col md:flex-row  md:justify-between">
-      <div class="p-10 text-2xl md:text-4xl font-bold">
+    <div class="flex flex-col md:flex-row  md:justify-between">
+      <div class="p-5 ml-5 mt-4 text-2xl md:text-4xl font-bold font-DoHyeon">
         <div v-if="isObjEmpty">
-          <p>검색하쉴?</p>
+          <p>Search</p>
         </div>
         <div v-else>
-          <p>영화보쉴?</p>
+          <p>Movie List</p>
         </div>
       </div>
-      <div class="flex justify-center items-center">
+      <div class="flex justify-center md:mt-5 items-center">
         <SearchForm/>
       </div>
     </div>
@@ -66,4 +66,7 @@ export default {
   color: #42b983;
 }
 
+.font-sans {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 </style>

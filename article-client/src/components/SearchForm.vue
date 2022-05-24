@@ -1,9 +1,9 @@
 <template>
-  <form @submit.prevent class="relative z-0">
+  <form @submit.prevent class="relative z-0 mx-7">
     <input
       type="text"
       class="border border-slate-500 rounded-lg w-full p-2 px-14"
-      placeholder="검색하장"
+      placeholder="검색어"
       @input="onSearchDebounce"
       >
     <div class="align-center absolute top-1 left-2">
