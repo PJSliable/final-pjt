@@ -144,40 +144,10 @@ def movie_search(request):
     if search_output:
         serializer = MovieSummarySerializer(search_output, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    return JsonResponse(serializer.errors, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET'])
 def movie_detail(request, moviePk):
     movie = get_object_or_404(Movie, pk=moviePk)
     serializer = MovieDetailSerializer(movie)
     return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-# 참고 사항 json 보내는 2가지 방법
-# 1
-# @api_view(['POST'])
-# def likes(request, pk):
-#     article = get_object_or_404(Article,pk=pk)
-#     user = request.user
-#     response = {
-#         'liked':False,
-#         'count':0,
-#     }
-#     if article.like_users.filter(pk=user.pk).exists():
-#         article.like_users.remove(user)
-#     else:
-#         article.like_users.add(user)
-#         response['liked'] = True
-#     response['count'] = article.like_users.count()
-#     return JsonResponse(response)
-
-# 2
-# @api_view(['GET', 'POST'])
-# def article_list(request):
-#     if request.method == 'GET':
-#         # articles = Article.objects.all()
-#         articles = get_list_or_404(Article)
-#         serializer = ArticleListSerializer(articles, many=True)
-#         return Response(serializer.data)
-
-
-
