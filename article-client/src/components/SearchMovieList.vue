@@ -22,7 +22,7 @@ export default {
   computed: {
     movieList() {
       return this.$store.state.movies.searchMovies
-    }
+    },
   }
 }
 </script>

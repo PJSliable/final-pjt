@@ -119,22 +119,6 @@ export default {
         })
         .catch(err => console.error(err.response))
     },
-
-    // updateComment({ commit, getters }, { articlePk, commentPk, content }) {
-    //   const comment = { content }
-
-    //   axios({
-    //     url: drf.articles.comment(articlePk, commentPk),
-    //     method: 'put',
-    //     data: comment,
-    //     headers: getters.authHeader,
-    //   })
-    //     .then(res => {
-    //       commit('SET_ARTICLE_COMMENTS', res.data)
-    //     })
-    //     .catch(err => console.error(err.response))
-    // },
-
     deleteComment({ commit, getters }, { commentPk, reviewPk }) {
       Swal.fire({
         title: '댓글 삭제하실?',
@@ -146,8 +130,8 @@ export default {
         confirmButtonText: '삭제',
         cancelButtonText: '취소'
       })
-        .then((result) => {
-          if (result.value) {
+        .then((res) => {
+          if (res.value) {
             axios({
               url: api.community.comments(commentPk),
               method: 'delete',
@@ -162,6 +146,22 @@ export default {
               .catch(err => console.error(err.response))
           }
         })
+    },
+    updateComment({ commit, getters }, { reviewPk, commentPk, content }) {
+      const comment = { content }
+      axios({
+        url: api.community.comments(commentPk),
+        method: 'patch',
+        data: {
+          reviewPk,
+          comment,
+        },
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('SET_REVIEW_COMMENTS', res.data)
+        })
+        .catch(err => console.error(err.response))
     },
     likeReview({ commit, getters }, reviewPk) {
       axios({

@@ -4,9 +4,9 @@
         <div @click="getDetail" class="cardImg border-2 border-b-black">
           <img :src="imageUrl" alt="movie image" class="w-full rounded-t-md" :data-movie-pk="movie.pk" style="width:100%; height: 246px;">
         </div>
-        <div class="flex place-items-center" style="width: 100%; height: 100px;">
+        <div class="flex place-items-center" style="width: 100%; height: 80px;">
           <div class="flex-auto m-1">
-            <p class="text-xl font-bold font-GowunDodum text-center">{{ movie.title }}</p>
+            <p class="text-xs sm:text-sm md:text-md lg:text-l font-semibold font-GowunDodum self-start">{{ movie.title }}</p>
           </div>
           <div class="flex m-2 flex-initial w-10">
             <form @submit.prevent="clickLike" :data-movie-pk="movie.pk" >

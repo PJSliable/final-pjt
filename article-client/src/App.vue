@@ -4,7 +4,9 @@
       class="sticky top-0 z-50"
     />
     <hr>
-    <router-view/>
+    <router-view
+      class="mb-20"
+    />
   </div>
 </template>
 

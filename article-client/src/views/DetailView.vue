@@ -1,11 +1,11 @@
 <template>
   <div class="relative">
-    <div v-if="this.movie.backdrop_path" class="flex flex-col justify-center items-center">
+    <div v-if="this.movie.backdrop_path" class="flex flex-col justify-center items-center mt-10">
       <img :src="bgImgUrl" alt="backgroundImg" class="absolute pointer-events-none top-0 z-0 opacity-20 blur-sm w-full">
       <div class="flex z-10 pt-3 flex justify-center items-center">
-        <div class="grid border-2 grid-cols-3 flex w-4/5 md:w-2/3">
+        <div class="grid shadow-slate-600 shadow-lg rounded-lg grid-cols-3 bg-white flex w-4/5 md:w-2/3">
           <div class="w-full flex justify-center items-center">
-            <img :src="ptImgUrl" alt="posterImg" class="w-full" style="width:100%; height: 100%;">
+            <img :src="ptImgUrl" alt="posterImg" class="w-full rounded-l-lg" style="width:100%; height: 100%;">
           </div>
           <div class="col-span-2 w-full p-3">
             <div class="flex">

@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <!-- <div>
-      <span class="text-4xl font-bold">{{ profile.nickname }}</span>
-    </div> -->
+  <div class="flex flex-col items-center w-full pt-10">
+    <div>
+      <span class="text-4xl font-bold">{{ profile.nickname }}님의 프로필</span>
+    </div>
     <MyMovieList/>
-    <MyReviewList :profile="profile" class="w-2/3 justify-center"/>
-
+    <MyReviewList
+      class="w-full md:w-2/3 mb-20"
+      :profile="profile"
+    />
   </div>
 </template>
 

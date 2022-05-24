@@ -31,7 +31,8 @@ export default {
       },
   },
   getters: {
-    genres: state => state.genres
+    genres: state => state.genres,
+    noSearchMovies: state => state.noSearchMovies
   },
   mutations: {
     CLEAR_MOVIES(state) {
@@ -87,7 +88,6 @@ export default {
       if (!userInput) {
         return commit('FETCH_SEARCH_MOVIES', [])
       }
-
       axios({
         url: api.movies.search(),
         method: 'get',
@@ -96,7 +96,13 @@ export default {
         },
       })
         .then(res => {
+          if (res.status === 204) {
+            return
+          }
           commit('FETCH_SEARCH_MOVIES', res.data)
+        })
+        .catch(err => {
+          console.log(err)
         })
     },
     likeMovie({ getters }, moviePk) {
