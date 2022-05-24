@@ -51,21 +51,16 @@ export default {
     onSubmit() {
       if (this.action === 'create') {
         const payload = {
-          movie: this.$route.params.moviePk,
+          moviePk: this.$route.params.moviePk,
           ...this.newReview
         }
         this.createReview(payload)
       } else if (this.action === 'update') {
         const payload = {
           pk: this.review.pk,
-          movie: this.review.movie,
           ...this.newReview
         }
-        const data = {
-          review: payload,
-          reviewPk: this.review.pk
-        }
-        this.updateReview(data)
+        this.updateReview(payload)
       }
     }
   }
