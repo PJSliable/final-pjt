@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>내 영화 카드</p>
+    <p class="text-2xl font-bold p-10 md:text-4xl font-DoHyeon">내 영화 카드</p>
     <div class="w-full h-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 place-content-center">
       <MovieCard
         v-for="movie in profile.my_movies"

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div>
-      <span class="text-4xl font-bold">{{ profile.username }}</span>
-    </div>
+    <!-- <div>
+      <span class="text-4xl font-bold">{{ profile.nickname }}</span>
+    </div> -->
     <MyMovieList/>
-    <MyReviewList :profile="profile"/>
+    <MyReviewList :profile="profile" class="w-2/3 justify-center"/>
 
   </div>
 </template>

@@ -1,10 +1,8 @@
 <template>
   <div>
-      <div>
-      <p>내 리뷰 목록</p>
-      <div v-if="reviews">
-        <ReviewList :reviews="reviews"/>
-      </div>
+    <p class="text-2xl font-bold p-10 md:text-4xl font-DoHyeon">내 리뷰 목록</p>
+    <div v-if="reviews">
+      <ReviewList :reviews="reviews"/>
     </div>
   </div>
 </template>
