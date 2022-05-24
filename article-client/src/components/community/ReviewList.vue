@@ -11,6 +11,9 @@
           <th scope="col" class="px-6 py-3">
               리뷰 제목
           </th>
+          <th scope="col" class="px-6 py-3">
+              작성자
+          </th>
         </tr>
     </thead>
     <tbody>
@@ -18,7 +21,7 @@
         v-for="(review, index) in reviews"
         :key="index"
         class="bg-lime-100 hover:bg-lime-200"
-        @click=reviewClick(review.movie)
+        @click=reviewClick(review.pk)
       >
         <td class="px-6 py-4">
           <star-rating
@@ -36,6 +39,9 @@
         </td>
         <td class="px-6 py-4">
           {{ review.title }}
+        </td>
+        <td class="px-6 py-4">
+          {{ review.user.nickname }}
         </td>
       </tr>
     </tbody>
