@@ -1,5 +1,27 @@
 <template>
   <div>
+    <div class="w-full">
+      <div class="rounded-lg bg-white w-2/3 md:w-1/2">
+      <p>{{ review.username }} 님의 평가!</p>
+      <div>
+        <p>평가하신 영화: {{ review.movie.title }}</p>
+      </div>
+      <div class="flex">
+        <p>하사하신 평점 : </p>
+        <star-rating
+              :increment="0.5"
+              :star-size="12"
+              :md-star-size="24"
+              :rating="review.rate"
+              :show-rating="false"
+              :read-only="true"
+              color="#ff0000"
+            >
+        </star-rating>
+      </div>
+      
+      </div>
+    </div>
     <p>{{ reviewPk }}번째 게시글</p>
     <router-link :to="{ name: 'detail', params: { moviePk: `${moviePk}` } }"> 영화정보 바로가기</router-link>
     {{ review.movie }}
@@ -34,11 +56,13 @@
 <script>
 import CommentList from '@/components/community/CommentList.vue'
 import { mapActions, mapGetters } from 'vuex'
+import StarRating from 'vue-star-rating'
 
 export default {
   name: 'ReviewDetailView',
   components: {
-    CommentList
+    CommentList,
+    StarRating,
   },
   data() {
     return {
