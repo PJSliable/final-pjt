@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div v-if="this.movie.backdrop_path" class="flex flex-col justify-center items-center">
-      <img :src="bgImgUrl" alt="backgroundImg" class="absolute pointer-events-none top-0 z-0 opacity-50 blur-sm w-full">
+      <img :src="bgImgUrl" alt="backgroundImg" class="absolute pointer-events-none top-0 z-0 opacity-20 blur-sm w-full">
       <div class="flex z-10 pt-3 flex justify-center items-center">
         <div class="grid border-2 grid-cols-3 flex w-4/5 md:w-2/3">
           <div class="w-full flex justify-center items-center">
@@ -12,25 +12,27 @@
               <p class="font-bold text-xl md:text-3xl lg:text-4xl">{{ movie.title }}</p>
             </div>
 
+            <div>
+              <p>줄거리</p>
+              <p>{{ movie.overview }}</p>
+            </div>
+
           </div>
         </div>
       </div>
-      <div>
-        <p>줄 to the 거리</p>
-        <p>{{ movie.overview }}</p>
-      </div>
       <hr>
       <div>
-        <p> 리뷰 목록 </p>
         <div>
-          <p>리뷰작성하기</p>
           <router-link
             :to="{ name: 'reviewCreate', params: { moviePk: moviePk } }"
-          >Create</router-link>
+          >
+          <button class="px-10 py-1 m-3 font-Jua bg-orange-400">리뷰작성하기</button>
+          
+          </router-link>
         </div>
       </div>
       <div>
-        <p>리뷰 목록</p>
+        <p class="mb-3">리뷰 목록</p>
         <ReviewList
           :reviews="movie.reviews"
         />

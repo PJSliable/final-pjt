@@ -1,5 +1,5 @@
 <template>
-  <table class="w-full text-sm bg-green-400 text-left text-gray-500">
+  <table class="w-full text-sm bg-yellow-300 text-center text-gray-500">
     <thead class="text-xs text-gray-800 uppercase bg-">
         <tr>
           <th scope="col" class="px-6 py-3">
@@ -20,7 +20,7 @@
       <tr
         v-for="(review, index) in reviews"
         :key="index"
-        class="bg-lime-100 hover:bg-lime-200"
+        class="bg-gray-50 hover:bg-yellow-100"
         @click=reviewClick(review.pk)
       >
         <td class="px-6 py-4">
