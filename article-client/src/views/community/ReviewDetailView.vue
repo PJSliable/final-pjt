@@ -75,7 +75,7 @@ export default {
       return this.review.like_users?.length
     },
     moviePk() {
-      return this.review.movie
+      return this.review.movie.pk
     },
   },
   methods: {
