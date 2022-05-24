@@ -61,9 +61,8 @@ export default {
         }
       })
     },
-    updateReview({ commit, getters }, data) {
-      const review = data.review
-      const reviewPk = data.reviewPk
+    updateReview({ commit, getters }, review) {
+      const reviewPk = review.pk
       axios({
         url: api.community.review(reviewPk),
         method: 'patch',

@@ -63,8 +63,8 @@ export default {
     },
   },
   methods: {
-    reviewClick(moviePk) {
-      return this.$router.push({ name: 'detail', params: { moviePk }})
+    reviewClick(reviewPk) {
+      return this.$router.push({ name: 'reviewDetail', params: { reviewPk }})
     }
   }
 }
