@@ -1,6 +1,15 @@
 <template>
   <form @submit.prevent="onSubmit">
     <p>{{this.$route.params.moviePk}}</p>
+    <star-rating class="col-3"
+      :show-rating="false"
+      :increment="1"
+      :glow="2"
+      :clearable=true
+      :star-size="40"
+      v-model="newReview.rate"  
+    >
+    </star-rating>
     <div>
       <label for="title">title: </label>
       <input v-model="newReview.title" class="border" type="text" id="title" />
@@ -10,8 +19,6 @@
       <textarea v-model="newReview.content" type="text" id="content"></textarea>
     </div>
     <div>
-      <label for="rate">rate: </label>
-      <input v-model.number="newReview.rate" min="0" max="5" id="rate">
     </div>
     <button>{{ action }}</button>
   </form>
@@ -19,9 +26,13 @@
 
 <script>
 import { mapActions } from 'vuex'
+import StarRating from 'vue-star-rating'
 
 export default {
   name: 'ReviewForm',
+  components: {
+    StarRating
+  },
   props: {
     review: Object,
     action: String,

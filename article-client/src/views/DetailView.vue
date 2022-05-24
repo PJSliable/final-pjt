@@ -30,18 +30,24 @@
         </div>
       </div>
       <div>
-        <p>댓글 목록</p>
-        <p>{{ movie.reviews }}</p>
+        <p>리뷰 목록</p>
+        <ReviewList
+          :reviews="movie.reviews"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ReviewList from '@/components/community/ReviewList.vue'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'DetailView',
+  components: {
+    ReviewList
+  },
   data() {
     return {
       moviePk: this.$route.params.moviePk
