@@ -1,7 +1,11 @@
 <template>
   <div>
-    <!-- <img class="not-found" src="@/assets/404.jpg" alt="not-found"> -->
-    <h1>404 Not Found</h1>
+    <div class="mt-64 text-5xl font-Jua">
+      <p>페이지를 찾을 수 없습니다</p>
+    </div>
+    <div class="pt-20 text-5xl font-Jua">
+      <p>정상적인 경로를 이용해주세요</p>
+    </div>
   </div>
 </template>
 
