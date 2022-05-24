@@ -6,10 +6,10 @@
               평점
           </th>
           <th scope="col" class="px-6 py-3">
-              리뷰 제목
+              영화 제목
           </th>
           <th scope="col" class="px-6 py-3">
-              작성자
+              리뷰 제목
           </th>
         </tr>
     </thead>
@@ -32,10 +32,10 @@
           >
           </star-rating>
         <td class="px-6 py-4">
-          {{ review.title }}
+          {{ review.movie.title }}
         </td>
         <td class="px-6 py-4">
-          {{ review.user.username }}
+          {{ review.title }}
         </td>
       </tr>
     </tbody>
