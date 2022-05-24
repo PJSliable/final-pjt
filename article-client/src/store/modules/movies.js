@@ -41,7 +41,7 @@ export default {
       state.recommendMovies = []
     },
     FETCH_RECOMMEND_MOVIES(state, movies) {
-      state.recommendMovies.push(movies)
+      state.recommendMovies = movies
     },
     FETCH_MOVIES(state, movies) {
       state.movies.push(movies)
@@ -64,7 +64,7 @@ export default {
         headers: getters.authHeader,
       })
         .then(res => {
-          commit('FETCH_SEARCH_MOVIES', res.data)
+          commit('FETCH_RECOMMEND_MOVIES', res.data)
         })
     },
     fetchMovies({ commit }) {
@@ -129,9 +129,6 @@ export default {
         },
         headers: getters.authHeader,
       })
-        .then((res) => {
-          console.log(moviePk, res)
-        })
     }
   },
 }

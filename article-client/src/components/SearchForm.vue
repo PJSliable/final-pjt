@@ -2,7 +2,7 @@
   <form @submit.prevent class="relative z-0 mx-7">
     <input
       type="text"
-      class="border border-slate-500 rounded-lg w-full p-2 px-14"
+      class="border border-slate-500 rounded-lg w-full p-2 pl-16"
       placeholder="검색어"
       @input="onSearchDebounce"
       >

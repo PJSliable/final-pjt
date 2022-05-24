@@ -14,7 +14,6 @@
       </div>
     </div>
     <div v-if="isObjEmpty">
-      
       <SearchMovieList/>
     </div>
     <div v-else>
@@ -42,6 +41,7 @@
 
 <script>
 import MovieList from '@/components/MovieList.vue'
+import MovieCard from '@/components/MovieCard.vue'
 import SearchForm from '@/components/SearchForm.vue'
 import SearchMovieList from '@/components/SearchMovieList.vue'
 import { mapGetters } from 'vuex'
@@ -50,6 +50,7 @@ export default {
   name: 'MovieView',
   components: {
     MovieList,
+    MovieCard,
     SearchForm,
     SearchMovieList,
   },
