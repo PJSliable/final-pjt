@@ -68,6 +68,9 @@ export default {
     username() {
       return this.currentUser.username ? this.currentUser.username : 'guest'
     },
+    nickname() {
+      return this.currentUser.nickname ? this.currentUser.nickname : 'guest'
+    },
   },
 }
 </script>
