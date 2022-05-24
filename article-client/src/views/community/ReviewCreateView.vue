@@ -1,14 +1,16 @@
 <template>
-  <div>
-    <p>새로운 게시글 생성</p>
-    {{ this.$route.params.moviePk }}
-    {{ review }}
+  <div class="flex justify-center items-center mb-10" style="margin-top: 100px">
+    <div class="flex w-full justify-center">
+      <div class="flex flex-col border-2 border-black bg-white rounded-lg p-5">
+        <p class="flex flex-col text-4xl font-bold p-10 pb-5">리뷰 작성하기</p>
+        <ReviewForm
+          :review="review"
+          action="create"
+        />
+      </div>
+    </div>
+
     <hr>
-    <review-form
-      :review="review"
-      :moviePk="this.$route.params.moviePk"
-      action="create"
-    ></review-form>
   </div>
 </template>
 
