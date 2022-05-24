@@ -7,6 +7,7 @@ const USER_URL = 'accounts/user/'
 const PROFILE_URL = 'accounts/profile/'
 
 const MOVIES_URL = 'movies/'
+const RECOMMENDS_URL = 'recommends/'
 const SEARCH_URL = 'search/'
 const LIKE_URL = 'mymovie/'
 
@@ -28,6 +29,7 @@ export default {
     comment: () => API_BASE_URL + COMMUNITY_URL + COMMENT_URL,
   },
   movies: {
+    recommends: () => API_BASE_URL + MOVIES_URL + RECOMMENDS_URL,
     movies: () => API_BASE_URL + MOVIES_URL,
     movieDetail: moviePk =>API_BASE_URL + MOVIES_URL + `${moviePk}/`,
     search: () => API_BASE_URL + MOVIES_URL + SEARCH_URL,

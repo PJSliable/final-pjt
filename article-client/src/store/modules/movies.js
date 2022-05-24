@@ -4,6 +4,7 @@ import api from '@/api/index.js'
 
 export default {
   state: {
+    recommendMovies: [],
     movies: [],
     searchMovies: [],
     movieDetail: {},
@@ -37,6 +38,10 @@ export default {
   mutations: {
     CLEAR_MOVIES(state) {
       state.movies = []
+      state.recommendMovies = []
+    },
+    FETCH_RECOMMEND_MOVIES(state, movies) {
+      state.recommendMovies.push(movies)
     },
     FETCH_MOVIES(state, movies) {
       state.movies.push(movies)
@@ -51,6 +56,16 @@ export default {
   actions: {
     clearMovies({commit}) {
       commit('CLEAR_MOVIES')
+    },
+    fetchRecommedMovies({ commit, getters }) {
+      axios({
+        url: api.movies.recommends(),
+        method: 'get',
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('FETCH_SEARCH_MOVIES', res.data)
+        })
     },
     fetchMovies({ commit }) {
       const genres = [12, 14, 16, 18, 27, 28, 35, 36, 37, 53, 80, 99, 878, 9648, 10402, 10749, 10751, 10752, 10770]

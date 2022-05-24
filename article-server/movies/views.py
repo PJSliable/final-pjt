@@ -144,7 +144,7 @@ def movie_search(request):
     if search_output:
         serializer = MovieSummarySerializer(search_output, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    return JsonResponse(serializer.errors, status=status.HTTP_204_NO_CONTENT)
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET'])
 def movie_detail(request, moviePk):
