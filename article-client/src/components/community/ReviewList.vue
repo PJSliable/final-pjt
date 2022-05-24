@@ -34,6 +34,7 @@
             color="#ff0000"
           >
           </star-rating>
+        </td>
         <td class="px-6 py-4">
           {{ review.movie.title }}
         </td>
