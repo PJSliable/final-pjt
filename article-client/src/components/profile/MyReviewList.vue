@@ -2,7 +2,6 @@
   <div>
       <div>
       <p>내 리뷰 목록</p>
-      {{ reviews }}
       <div v-if="reviews">
         <ReviewList :reviews="reviews"/>
       </div>
