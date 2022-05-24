@@ -28,7 +28,6 @@ def review_list_or_create(request):
             'rate': request.data.get('rate'),
         }
         serializer = ReviewSerializer(data=Newdata)
-        print(serializer)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=user, movie=movie)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -48,7 +47,6 @@ def review_detail_like_or_update_delete(request, reviewPk):
 
     def review_detail():
         serializer = ReviewSerializer(review)
-        print(serializer.data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def like_review():
