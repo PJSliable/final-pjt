@@ -54,7 +54,7 @@ export default {
       return this.$store.state.movies.movieDetail
     },
     bgImgUrl() {
-      return this.$store.state.movies.imageBaseUrl + this.movie.backdrop_path
+      return this.$store.state.movies.imageBaseUrl + this.$store.getters.backdropImg
     },
     ptImgUrl() {
       return this.$store.state.movies.imageBaseUrl + this.movie.poster_path

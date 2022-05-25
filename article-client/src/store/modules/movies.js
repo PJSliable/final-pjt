@@ -33,6 +33,7 @@ export default {
   },
   getters: {
     genres: state => state.genres,
+    backdropImg: state => state.movieDetail.backdrop_path,
   },
   mutations: {
     CLEAR_MOVIES(state) {
@@ -91,6 +92,7 @@ export default {
       })
     },
     fetchDetail({ commit }, { moviePk }) {
+      commit('FETCH_MOVIE_DETAIL', {})
       axios({
         url: api.movies.movieDetail(moviePk),
         method: 'get',
