@@ -113,9 +113,9 @@ export default {
       }
     },
 
-    fetchProfile({ commit, getters }, { username }) {
+    fetchProfile({ commit, getters }, { nickname }) {
       axios({
-        url: api.accounts.profile(username),
+        url: api.accounts.profile(nickname),
         method: 'get',
         headers: getters.authHeader,
       })

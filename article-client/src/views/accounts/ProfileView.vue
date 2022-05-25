@@ -30,7 +30,7 @@ export default {
     ...mapActions(['fetchProfile'])
   },
   created() {
-    const payload = { username: this.$route.params.username }
+    const payload = { nickname: this.$route.params.nickname }
     this.fetchProfile(payload)
   },
 }
