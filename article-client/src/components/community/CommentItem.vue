@@ -1,8 +1,8 @@
 <template>
   <div class="flex justify-around">
     <div class="flex items-center gap-5">
-      <router-link :to="{ name: 'profile', params: { username: comment.user.username } }">
-        {{ comment.user.username }}
+      <router-link :to="{ name: 'profile', params: { username: comment.user.nickname } }">
+        {{ comment.user.nickname }}
       </router-link>:
       <span v-if="!isEditing" class="font-GowunDodum">{{ payload.content }}</span>
       <span v-else>

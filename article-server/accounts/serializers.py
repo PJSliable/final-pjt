@@ -23,8 +23,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = ('username', 'my_movies', 'reviews','nickname', )
 
-
-
 class ChangePasswordSerializer(serializers.Serializer):
     model = get_user_model()
     old_password = serializers.CharField(required=True)

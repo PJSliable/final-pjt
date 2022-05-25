@@ -13,7 +13,7 @@ class CommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     class Meta:
         model = Comment
-        fields = ('pk', 'user', 'content', 'review',)
+        fields = ('pk', 'user', 'content', 'review', 'created_at')
         read_only_fields = ('review', )
 
 
@@ -30,4 +30,4 @@ class ReviewSerializer(serializers.ModelSerializer):
     movie = MovieSummarySerializer(read_only=True)
     class Meta:
         model = Review
-        fields = ('pk', 'user', 'rate', 'movie', 'title', 'content', 'comments', 'like_users')
+        fields = ('pk', 'user', 'rate', 'movie', 'title', 'content', 'comments', 'like_users', 'created_at')
