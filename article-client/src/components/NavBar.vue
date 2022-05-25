@@ -77,7 +77,7 @@ export default {
 
 <style scoped>
 nav {
-  padding: 30px;
+  padding: 20px;
 }
 
 nav a {
