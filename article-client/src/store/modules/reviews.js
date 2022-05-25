@@ -13,7 +13,7 @@ export default {
     reviews: state => state.reviews,
     review: state => state.review,
     isAuthor: (state, getters) => {
-      return state.review.user?.pk === getters.currentUser.pk
+      return state.review.user?.nickname === getters.currentUser.nickname
     },
     isReview: state => !_.isEmpty(state.review),
   },

@@ -124,7 +124,6 @@ export default {
   data() {
     return {
       reviewPk: this.$route.params.reviewPk,
-      likeState: true
     }
   },
   computed: {
@@ -153,7 +152,6 @@ export default {
     },
     clickLike() {
       this.likeReview(this.$route.params.reviewPk)
-      this.likeState = !this.likeState
     }
   },
   created() {
