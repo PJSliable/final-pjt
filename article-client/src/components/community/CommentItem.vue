@@ -2,8 +2,8 @@
   <div class="flex justify-around">
     <div class="flex items-center gap-5">
       <router-link :to="{ name: 'profile', params: { nickname: comment.user.nickname } }" class="font-GowunDodum">
-        {{ comment.user.nickname }}
-      </router-link>:
+        <span class="users">{{ comment.user.nickname }}</span>
+        </router-link>:
       <span v-if="!isEditing" class="font-GowunDodum">{{ payload.content }}</span>
       <span v-else>
         <input class="border-2 border-slate-900 text-center px-1 font-GowunDodum rounded-md" type="text" v-model="payload.content">
@@ -11,8 +11,12 @@
         <button @click="switchIsEditing" class="font-GowunDodum">취소</button>
       </span>
     </div>
-
-    <div v-if="currentUser.username === comment.user.username && !isEditing"  class="flex items-center gap-5">
+    <div>
+      <span class="font-GowunDodum">
+        {{ comment.created_at.substr(5,5) }}  {{ comment.created_at.substr(11,8) }}
+      </span>
+    </div>
+    <div v-if="currentUser.username === comment.user.username && !isEditing" class="flex items-center gap-5">
       <button @click="switchIsEditing">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +100,14 @@ export default {
 </script>
 
 <style scoped>
-.font-sans {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+.users {
+  color: black;
+  opacity: 0.7;
+}
+
+.users:hover {
+  cursor: pointer;
+  color: red;
+  opacity: 0.8;
 }
 </style>

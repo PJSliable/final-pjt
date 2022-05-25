@@ -3,7 +3,8 @@
     <div class="p-1 md:p-3 flex flex-col justify-center items-center rounded-lg bg-white w-4/5 md:w-2/3">
       <div class="flex flex-col w-full px-1 md:px-5 lg:px-10">
         <div class="flex justify-center ">
-          <p class="flex text-2xl font-bold p-3 md:text-4xl font-DoHyeon">{{nickname}}님의 평가</p>
+          <p class="flex text-2xl font-bold p-3 md:text-4xl font-DoHyeon"><span class="users">{{nickname}}</span>님의 평가</p>
+          <!-- isAuthor가 false로 출력됨 -->
           <div v-if="isAuthor" class="flex items-center gap-5">
             <router-link :to="{ name: 'reviewEdit', params: { reviewPk } }">
               <svg
@@ -84,6 +85,7 @@
 
               <div class="self-start flex flex-col gap-5">
                 <p class="font-bold text-l sm:text-xl md:text-2xl font-DoHyeon lg:text-4xl">{{ review.title }}</p>
+                <span class="font-GowunDodum">{{ review.created_at.substr(0,10) }}  {{ review.created_at.substr(11,8) }}</span> 
                 <p class="font-GowunDodum">{{ review.content }}</p>  
               </div>
               <div class="flex gap-3">
@@ -105,7 +107,10 @@
   </div>
 </template>
 
+
+
 <script>
+
 import CommentList from '@/components/community/CommentList.vue'
 import { mapActions, mapGetters } from 'vuex'
 import StarRating from 'vue-star-rating'
@@ -158,18 +163,15 @@ export default {
 </script>
 
 <style scoped>
-.font-sans {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
 .users {
-  color: gray;
+  color: black;
+  opacity: 0.7;
 }
 
 .users:hover {
   cursor: pointer;
-  color: black;
-  opacity: 0.5;
+  color: red;
+  opacity: 0.8;
 }
 
 .cardImg img {

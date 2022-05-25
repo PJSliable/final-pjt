@@ -27,7 +27,7 @@
       </div>
       <hr>
       <div>
-        <div>
+        <div class="pt-3">
           <router-link
             :to="{ name: 'reviewCreate', params: { moviePk: moviePk } }"
           >
