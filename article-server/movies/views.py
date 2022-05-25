@@ -121,9 +121,7 @@ def movie_recommends(request):
         if genre_list:
             now_genre = random.sample(genre_list, 1)[0]
         else:
-            genre_list = Genre.objects.all()
-            now_genre = random.sample(genre_list, 1)[0]
-
+            now_genre = Genre.objects.order_by('?')[0]
         user = request.user
         reviews = user.reviews.all()
         my_movies = user.my_movies.all()
@@ -131,7 +129,6 @@ def movie_recommends(request):
         genre_recommended_movies = now_genre.genres.filter(~Q(pk__in=my_movies) & ~Q(reviews__in=reviews)).order_by('-vote_average')[:need_number]
         recommended_movies.extend(list(genre_recommended_movies))
 
-    print(recommended_movies)
     serializer = MovieSummarySerializer(recommended_movies, many=True)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
