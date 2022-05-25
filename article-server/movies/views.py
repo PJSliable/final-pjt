@@ -15,8 +15,8 @@ def movie_list(request):
     # 랜덤 장르 3개, 장르별 영화 24개
     genre_id = request.GET.get('genre_id')
 
-    # 중복 제거
-    # user = request.user
+    # 중복 제거할려면 request에 user를 담아서 보내야 함.
+    # user = request.user 현재는 AnonymousUser이기에 작업 불가능
     # reviews = user.reviews.all()
     # my_movies = user.my_movies.all()
     # .filter(~Q(pk__in=my_movies) & ~Q(reviews__in=reviews))
@@ -44,9 +44,10 @@ def movie_recommends(request):
     user = request.user
     # 자신이 평점을 3점 이상으로 부여한 리뷰 리스트를 불러온다.
     reviews = user.reviews.filter(rate__gte=3)
-    if user.reviews.filter(rate__gte=3).exists:
-        movie_list = []
-        genre_list = []
+    movie_list = []
+    genre_list = []
+
+    if reviews.exists:
         for review in reviews:
             # 해당 리뷰가 어떤 영화의 리뷰인지 저장한다.
             if review.movie not in movie_list:
