@@ -3,11 +3,11 @@
     <input
       type="text"
       class="border border-slate-500 rounded-lg w-full p-2 pl-16"
-      placeholder="검색어"
+      placeholder="영화 제목을 검색하세요."
       @input="onSearchDebounce"
       >
-    <div class="align-center absolute top-1 left-2">
-      <span class="align-middle border-r-2 border-slate-300 text-3xl">🔍</span>
+    <div class="searchIcon align-center absolute top-1">
+      <span class="align-middle border-r-2 border-slate-300 text-2xl pl-2 px-1">🔍</span>
     </div>
   </form>
 </template>
@@ -27,5 +27,7 @@ export default {
 </script>
 
 <style scoped>
-
+.searchIcon:hover {
+  cursor: Default;
+}
 </style>
