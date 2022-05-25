@@ -150,7 +150,6 @@ def movie_detail(request, moviePk):
 @api_view(['GET'])
 def movieInfo(request):
     movie_pk = request.GET.get('moviePk')
-    print(movie_pk)
     movie_title = Movie.objects.get(pk=movie_pk).title
     response = {
         'movie_title': movie_title
