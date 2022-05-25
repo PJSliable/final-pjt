@@ -12,12 +12,20 @@
             <div>
               <p class="font-bold my-3 text-xl md:text-3xl lg:text-4xl">{{ movie.title }}</p>
             </div>
-            <div class="my-3 text-xl">
-              <p>평점 : {{ movie.vote_average }},  개봉일 : {{ movie.release_date }},  장르 : {{ movie.genre_ids }}</p>
+            <div class="my-3 text-xl font-bold font-GowunDodum">
+              <p>평점 : {{ movie.vote_average }},  개봉일 : {{ movie.release_date }}</p>
+                <div class="flex justify-center gap-3">
+                  <GenreLabel
+                    v-for="(genre, index) in genres"
+                    :key="index"
+                    :genre="genre"
+                  />
+                </div>
+              
             </div>
-            <div>
-              <p class="my-3 text-2xl">줄거리</p>
-              <p class="text-xl">{{ movie.overview }}</p>
+            <div class="flex flex-col p-3">
+              <p class="self-start my-3 text-2xl font-bold font-GowunDodum">줄거리</p>
+              <p class="text-left text-xl font-GowunDodum">{{ movie.overview }}</p>
             </div>
           </div>
 
@@ -26,7 +34,7 @@
             <div>
               <div class="p-10">
                 <router-link
-                  :to="{ name: 'reviewCreate', params: { moviePk: moviePk, title:movie.title } }"
+                  :to="{ name: 'reviewCreate', params: { moviePk: moviePk } }"
                 >
                   <button class="px-10 py-1 m-3 font-Jua bg-orange-400 rounded-lg">리뷰 작성하러 가기</button>
                 </router-link>
@@ -66,16 +74,19 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
 <script>
+import GenreLabel from '@/components/GenreLabel.vue'
 import { mapActions } from 'vuex'
 import StarRating from 'vue-star-rating'
 
 export default {
   name: 'DetailView',
   components: {
+    GenreLabel,
     StarRating,
   },
   data() {
@@ -99,6 +110,9 @@ export default {
     isReviews() {
      return this.$store.getters.movieDetail.reviews?.length
     },
+    genres() {
+      return this.$store.getters.movieDetail.genre_ids
+    }
   },
   methods: {
     ...mapActions(['fetchDetail']),
@@ -111,7 +125,4 @@ export default {
 </script>
 
 <style scoped>
-.font-sans {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
 </style>
