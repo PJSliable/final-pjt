@@ -1,7 +1,11 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col">
     <p class="ml-10 mt-8 font-semibold text-3xl md:text-4xl self-start font-DoHyeon">{{ genreName }} 영화</p>
-    <div class="w-full h-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 place-content-center">
+    <carousel
+      :items="6"
+      :loop="false"
+      :nav="false"
+    >
       <MovieCard
         v-for="(movie, index) in movieList"
         :key="index"
@@ -9,18 +13,20 @@
         :isLiked="false"
         class="mb-12"
       />
-    </div>
+    </carousel>
   </div>
 </template>
 
 <script>
 import MovieCard from '@/components/MovieCard.vue'
 import { mapGetters } from 'vuex'
+import carousel from 'vue-owl-carousel'
 
 export default {
   name: 'MovieList',
   components: {
     MovieCard,
+    carousel,
   },
   props: {
     movieList:{

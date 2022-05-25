@@ -34,7 +34,8 @@ export default {
   getters: {
     genres: state => state.genres,
     backdropImg: state => state.movieDetail.backdrop_path,
-    movieDetail: state => state.movieDetail
+    movieDetail: state => state.movieDetail,
+    recommendMovies: state => state.recommendMovies
   },
   mutations: {
     CLEAR_MOVIES(state) {
