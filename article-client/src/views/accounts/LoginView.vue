@@ -8,15 +8,15 @@
       <form @submit.prevent="login(credentials)" class="mt-5">
         <div class="flex flex-col justify-between gap-3">
           <p class="self-start font-Jua">아이디</p>
-          <input class="border-2 border-slate-900 text-center px-1 font-Jua" type="text" name="username" v-model="credentials.username" required>
+          <input class="border-2 border-slate-900 text-center px-1 font-GowunDodum rounded-md" type="text" name="username" v-model="credentials.username" required>
         </div>
         <br>
         <div class="flex flex-col justify-between gap-3">
           <p class="self-start font-Jua">비밀번호</p>
-          <input class="border-2 border-slate-900" type="password" name="password" v-model="credentials.password" required>
+          <input class="border-2 border-slate-900 rounded-md" type="password" name="password" v-model="credentials.password" required>
         </div>
         <br>
-        <button class="px-10 py-1 font-Jua bg-orange-400">로그인</button>
+        <button class="px-10 py-1 font-Jua bg-orange-400 rounded-lg">로그인</button>
       </form>
     </div>
   </div>

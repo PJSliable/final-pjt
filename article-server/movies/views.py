@@ -131,7 +131,7 @@ def movie_recommends(request):
         genre_recommended_movies = now_genre.genres.filter(~Q(pk__in=my_movies) & ~Q(reviews__in=reviews)).order_by('-vote_average')[:need_number]
         recommended_movies.extend(list(genre_recommended_movies))
 
-
+    print(recommended_movies)
     serializer = MovieSummarySerializer(recommended_movies, many=True)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 

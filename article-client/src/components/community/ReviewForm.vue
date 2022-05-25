@@ -21,7 +21,7 @@
     </div>
     <div>
     </div>
-    <button class="px-10 py-1 bg-orange-400">
+    <button class="px-10 py-1 bg-orange-400 rounded-lg">
       <span v-if="action==='create'">작성하기</span>
       <span v-else>수정하기</span>
     </button>
