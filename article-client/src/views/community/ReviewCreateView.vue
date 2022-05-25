@@ -3,6 +3,7 @@
     <div class="flex w-full justify-center">
       <div class="flex flex-col border-2 border-black bg-white rounded-lg p-5">
         <p class="flex flex-col text-4xl font-bold p-10 pb-5 font-DoHyeon">리뷰 작성하기</p>
+        {{movieTitle}}
         <ReviewForm
           :review="review"
           action="create"
@@ -16,6 +17,7 @@
 
 <script>
 import ReviewForm from '@/components/community/ReviewForm.vue'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'ReviewCreateView',
@@ -33,6 +35,18 @@ export default {
       }
     }
   },
+  computed: {
+    movieTitle() {
+      return this.$store.state.reviews.movieTitle
+    }
+  },
+  methods: {
+  ...mapActions(['fetchMovieTitle']),
+  },
+  created() {
+    const moviePk = this.$route.params.moviePk
+    this.fetchMovieTitle(moviePk)
+  }
 }
 </script>
 

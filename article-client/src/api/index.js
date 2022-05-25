@@ -13,6 +13,7 @@ const LIKE_URL = 'mymovie/'
 
 const COMMUNITY_URL = 'community/'
 const COMMENT_URL = 'comment/'
+const MOVIEINFO = 'movieInfo/'
 
 export default {
   accounts: {
@@ -25,6 +26,7 @@ export default {
   community: {
     reviews: () => API_BASE_URL + COMMUNITY_URL,
     review: reviewPk => API_BASE_URL + COMMUNITY_URL + `${reviewPk}/`,
+    movieInfo: () => API_BASE_URL + MOVIEINFO,
     comments: commentPk => API_BASE_URL + COMMUNITY_URL + COMMENT_URL + `${commentPk}/`,
     comment: () => API_BASE_URL + COMMUNITY_URL + COMMENT_URL,
   },
