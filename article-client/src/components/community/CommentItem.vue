@@ -7,7 +7,7 @@
       <span v-if="!isEditing" class="font-GowunDodum">{{ payload.content }}</span>
       <span v-else>
         <input class="border-2 border-slate-900 text-center px-1 font-GowunDodum rounded-md" type="text" v-model="payload.content">
-        <button @click="updateC" class="font-GowunDodum">수정</button> |
+        <button @click="updateC" class="font-GowunDodum ml-2">수정</button> |
         <button @click="switchIsEditing" class="font-GowunDodum">취소</button>
       </span>
     </div>
