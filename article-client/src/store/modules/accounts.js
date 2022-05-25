@@ -52,7 +52,6 @@ export default {
           router.push({ name: 'home' })
         })
         .catch(err => {
-          console.error(err.response.data)
           commit('SET_AUTH_ERROR', err.response.data)
         })
     },
@@ -75,7 +74,6 @@ export default {
           router.push({ name: 'movie' })
         })
         .catch(err => {
-          console.error(err.response.data)
           commit('SET_AUTH_ERROR', err.response.data)
         })
     },
@@ -104,7 +102,8 @@ export default {
           method: 'get',
           headers: getters.authHeader,
         })
-          .then(res => commit('SET_CURRENT_USER', res.data))
+          .then(res => {
+            commit('SET_CURRENT_USER', res.data)})
           .catch(err => {
             if (err.response.status === 401) {
               dispatch('removeToken')
@@ -124,7 +123,6 @@ export default {
           commit('SET_PROFILE', res.data)
         })
         .catch(err => {
-          console.error(err.response.data)
           commit('SET_AUTH_ERROR', err.response.data)
         })
     },
