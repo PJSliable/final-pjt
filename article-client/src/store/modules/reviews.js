@@ -38,7 +38,7 @@ export default {
     fetchMovieTitle({ commit }, moviePk) {
       axios({
         url: api.community.movieInfo(),
-        method: 'post',
+        method: 'get',
         data: {
           moviePk,
         },
