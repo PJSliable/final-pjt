@@ -21,12 +21,12 @@
 
     <td class="py-4 font-GowunDodum">
       <div v-if="currentUser.username === comment.user.username">
-        <span v-if="isEditing">
+        <span v-if="isEditing" class="flex items-center justify-center gap-3">
           <button @click="updateC" class="font-GowunDodum ml-2">수정</button>
           <button @click="switchIsEditing" class="font-GowunDodum">취소</button>
         </span>
         
-        <span v-else class="flex items-center justify-center gap-3">
+        <span v-else class="flex items-center justify-center gap-4">
           <button @click="switchIsEditing">
             <svg
               xmlns="http://www.w3.org/2000/svg"
