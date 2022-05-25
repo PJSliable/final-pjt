@@ -11,12 +11,12 @@
       >
       </star-rating>
       <div class="w-full flex flex-col gap-3">
-        <label class="self-start" for="title">리뷰 제목</label>
-        <input v-model="newReview.title" class="border-2 border-slate-900 text-center px-1 font-Jua" type="text" id="title" />
+        <label class="self-start font-GowunDodum" for="title">리뷰 제목</label>
+        <input v-model="newReview.title" class="border-2 border-slate-900 text-center px-1 font-GowunDodum rounded-md" type="text" id="title" />
       </div>
       <div class="w-full flex flex-col gap-3">
-        <label class="self-start" for="content">내용 </label>
-        <textarea v-model="newReview.content" type="text" id="content" class="border-2 border-slate-900 text-center px-1 font-Jua"></textarea>
+        <label class="self-start font-GowunDodum" for="content">내용 </label>
+        <textarea v-model="newReview.content" type="text" id="content" class="border-2 border-slate-900 text-center px-1 font-GowunDodum rounded-md"></textarea>
       </div>
     </div>
     <div>

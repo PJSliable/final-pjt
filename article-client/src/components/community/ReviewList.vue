@@ -2,16 +2,16 @@
   <table class="w-full text-sm bg-yellow-300 text-center text-gray-500">
     <thead class="text-xs text-gray-800 uppercase bg-">
         <tr>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3 font-GowunDodum">
               평점
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3 font-GowunDodum">
               영화 제목
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3 font-GowunDodum">
               리뷰 제목
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3 font-GowunDodum">
               작성자
           </th>
         </tr>
@@ -35,13 +35,13 @@
           >
           </star-rating>
         </td>
-        <td class="px-6 py-4">
+        <td class="px-6 py-4 font-GowunDodum">
           {{ review.movie.title }}
         </td>
-        <td class="px-6 py-4">
+        <td class="px-6 py-4 font-GowunDodum">
           {{ review.title }}
         </td>
-        <td class="px-6 py-4">
+        <td class="px-6 py-4 font-GowunDodum">
           {{ review.user.nickname }}
         </td>
       </tr>
