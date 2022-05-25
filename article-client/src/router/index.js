@@ -39,7 +39,7 @@ const routes = [
     component: LogoutView,
   },
   {
-    path: '/profile/:username',
+    path: '/profile/:nickname',
     name: 'profile',
     component: ProfileView,
   },

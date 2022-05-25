@@ -20,7 +20,7 @@ User = get_user_model()
 
 @api_view(['GET','DELETE'])
 def profile_or_delete_account(request, username):
-    user = get_object_or_404(User, username=username)
+    user = get_object_or_404(User, nickname=username)
 
     def profile():
         serializer = ProfileSerializer(user)

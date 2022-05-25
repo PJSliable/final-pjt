@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-around">
     <div class="flex items-center gap-5">
-      <router-link :to="{ name: 'profile', params: { username: comment.user.nickname } }" class="font-GowunDodum">
+      <router-link :to="{ name: 'profile', params: { nickname: comment.user.nickname } }" class="font-GowunDodum">
         {{ comment.user.nickname }}
       </router-link>:
       <span v-if="!isEditing" class="font-GowunDodum">{{ payload.content }}</span>
@@ -75,6 +75,9 @@ export default {
   },
   computed: {
     ...mapGetters(['currentUser']),
+    nickname() {
+      return this.currentUser.nickname
+    }
   },
   methods: {
     ...mapActions(['deleteComment', 'updateComment']),
