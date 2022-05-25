@@ -1,6 +1,6 @@
 <template>
-  <table class="w-full text-sm bg-yellow-300 text-center text-gray-500">
-    <thead class="text-xs text-gray-800 uppercase bg-">
+  <table class="w-full text-sm bg-yellow-300 text-center text-gray-500 rounded-lg">
+    <thead class="text-xs text-gray-800 uppercase">
         <tr>
           <th scope="col" class="px-6 py-3 font-GowunDodum">
               평점
