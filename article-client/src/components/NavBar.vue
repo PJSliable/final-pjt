@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="w-full border-b-2 border-white flex flex-wrap items-center justify-between bg-gradient-to-r from-yellow-500 via-red-500 to-pink-500 shadow-lg navbar navbar-expand-lg navbar-light"
+    class="w-full border-b-2 rounded-b-md border-white flex flex-wrap items-center justify-between bg-gradient-to-r from-yellow-300 via-amber-200 to-orange-300 shadow-lg navbar navbar-expand-lg navbar-light"
   >
     <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6 text-l text-white pr-2 font-semibold">
       <!-- 로고로 변경 필-->
@@ -80,8 +80,8 @@ nav {
   padding: 30px;
 }
 
-nav a.router-link {
-  color: #923c92;
+nav a {
+  color: #ffffff;
 }
 
 nav a:hover{
