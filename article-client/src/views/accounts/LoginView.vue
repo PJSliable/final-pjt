@@ -7,16 +7,16 @@
 
       <form @submit.prevent="login(credentials)" class="mt-5">
         <div class="flex flex-col justify-between gap-3">
-          <p class="self-start font-Jua">아이디</p>
+          <p class="self-start font-bold font-GowunDodum">아이디</p>
           <input class="border-2 border-slate-900 text-center px-1 font-GowunDodum rounded-md" type="text" name="username" v-model="credentials.username" required>
         </div>
         <br>
         <div class="flex flex-col justify-between gap-3">
-          <p class="self-start font-Jua">비밀번호</p>
-          <input class="border-2 border-slate-900 rounded-md" type="password" name="password" v-model="credentials.password" required>
+          <p class="self-start font-bold font-GowunDodum">비밀번호</p>
+          <input class="border-2 border-slate-900 text-center rounded-md" type="password" name="password" v-model="credentials.password" required>
         </div>
         <br>
-        <button class="px-10 py-1 font-Jua bg-orange-400 rounded-lg">로그인</button>
+        <button class="px-10 py-1 font-bold font-GowunDodum bg-orange-400 rounded-lg">로그인</button>
       </form>
     </div>
   </div>

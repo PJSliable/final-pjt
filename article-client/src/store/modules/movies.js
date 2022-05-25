@@ -69,7 +69,7 @@ export default {
           commit('FETCH_RECOMMEND_MOVIES', res.data)
         })
     },
-    fetchMovies({ commit }) {
+    fetchMovies({ commit, getters }) {
       const genres = [12, 14, 16, 18, 27, 28, 35, 36, 37, 53, 80, 99, 878, 9648, 10402, 10749, 10751, 10752, 10770]
       const randomGenres = _.sampleSize(genres, 3)
       randomGenres.forEach((genre) => {
@@ -78,7 +78,8 @@ export default {
           url: api.movies.movies(),
           params: {
             genre_id: genre
-          }
+          },
+          headers: getters.authHeader,
         })
           .then((res) => {
             const movies = {

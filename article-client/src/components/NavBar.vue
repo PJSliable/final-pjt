@@ -1,11 +1,11 @@
 <template>
   <nav
-    class="w-full border-b-2 rounded-b-md border-white flex flex-wrap items-center justify-between bg-gradient-to-r from-yellow-300 via-amber-200 to-orange-300 shadow-lg navbar navbar-expand-lg navbar-light"
+    class="w-full border-b-2 rounded-b-md border-white flex flex-wrap items-center justify-between bg-white shadow-lg navbar navbar-expand-lg navbar-light"
   >
     <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6 text-l text-white pr-2 font-semibold">
       <!-- 로고로 변경 필-->
-      <router-link v-if="isLoggedIn" class="text-4xl text-white pr-2 font-semibold font-Jua" :to="{ name: 'movie' }">Navbar</router-link>
-      <router-link v-else class="nav-link text-xl text-white pr-2 font-semibold font-Jua"  :to="{ name: 'home' }">Navbar</router-link>
+      <router-link v-if="isLoggedIn" class="text-4xl text-white pr-2 font-semibold font-DoHyeon" :to="{ name: 'movie' }">Navbar</router-link>
+      <router-link v-else class="nav-link text-xl text-white pr-2 font-semibold font-DoHyeon"  :to="{ name: 'home' }">Navbar</router-link>
 
       <button
         class="navbar-toggler text-gray-200 border-0 hover:shadow-none hover:no-underline py-2 px-2.5 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline"
@@ -36,20 +36,20 @@
       <div class="collapse navbar-collapse flex-grow items-center" id="navbarSupportedContent1">
         <ul class="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
           <li class="nav-item p-2">
-            <router-link class="nav-link font-Jua text-xl" v-if="isLoggedIn" :to="{ name: 'movie' }">Movie</router-link>
+            <router-link class="nav-link font-DoHyeon text-xl" v-if="isLoggedIn" :to="{ name: 'movie' }">Movie</router-link>
           </li>
           <li v-if="isLoggedIn" class="nav-item p-2">
-            <router-link :to="{ name: 'community' }" class="nav-link font-Jua text-xl">Community</router-link>
+            <router-link :to="{ name: 'community' }" class="nav-link font-DoHyeon text-xl">Community</router-link>
           </li>
         </ul>
 
         <ul class="navbar-nav flex flex-col pr-0 list-style-none mr-0">
           <li class="nav-item p-2">
-            <router-link v-if="isLoggedIn" :to="{ name: 'profile', params: { nickname } }" class="nav-link font-Jua text-xl">{{ nickname }}님 안녕하세요</router-link>
+            <router-link v-if="isLoggedIn" :to="{ name: 'profile', params: { nickname } }" class="nav-link font-DoHyeon text-xl">{{ nickname }}님 안녕하세요</router-link>
             <router-link v-else class="nav-link" :to="{ name: 'login'}">Login</router-link>
           </li>
           <li class="nav-item p-2">
-            <router-link v-if="isLoggedIn" class="nav-link font-Jua text-xl" :to="{ name: 'logout' }">Logout</router-link>
+            <router-link v-if="isLoggedIn" class="nav-link font-DoHyeon text-xl" :to="{ name: 'logout' }">Logout</router-link>
             <router-link v-else :to="{ name: 'signup' }">Signup</router-link>
           </li>
         </ul>
@@ -81,15 +81,15 @@ nav {
 }
 
 nav a {
-  color: #ffffff;
+  color: black
 }
 
 nav a:hover{
-  color: #CCCCCC
+  color: #e1e1e1
 }
 
 nav a.router-link-exact-active {
   font-weight: bold;
-  color: black;
+  color: #e1e1e1
 }
 </style>

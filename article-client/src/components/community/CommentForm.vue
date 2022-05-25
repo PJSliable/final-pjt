@@ -1,13 +1,12 @@
 <template>
-  <form @submit.prevent="onSubmit" class="items-center">
-    <label for="comment" class="font-GowunDodum"></label>
+  <form @submit.prevent="onSubmit" class="flex justify-center items-center">
     <input
       type="text"
       id="comment"
       v-model="content" required
       class="border-2 border-slate-900 text-center px-1 font-GowunDodum rounded-md"
     >
-    <button class="createBtn px-3 py-1 bg-lime-300 m-2 border-t-2 border-lime-300 rounded-lg font-Jua">작성</button>
+    <button class="createBtn px-3 py-1 bg-orange-400 m-2 rounded-lg font-Jua">작성</button>
   </form>
 </template>
 
