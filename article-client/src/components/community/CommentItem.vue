@@ -1,14 +1,14 @@
 <template>
   <div class="flex justify-around">
     <div class="flex items-center gap-5">
-      <router-link :to="{ name: 'profile', params: { username: comment.user.nickname } }">
+      <router-link :to="{ name: 'profile', params: { username: comment.user.nickname } }" class="font-GowunDodum">
         {{ comment.user.nickname }}
       </router-link>:
       <span v-if="!isEditing" class="font-GowunDodum">{{ payload.content }}</span>
       <span v-else>
-        <input class="border-2 border-slate-900 text-center px-1 font-Jua" type="text" v-model="payload.content">
-        <button @click="updateC">Update</button> |
-        <button @click="switchIsEditing">Cancle</button>
+        <input class="border-2 border-slate-900 text-center px-1 font-GowunDodum rounded-md" type="text" v-model="payload.content">
+        <button @click="updateC" class="font-GowunDodum">수정</button> |
+        <button @click="switchIsEditing" class="font-GowunDodum">취소</button>
       </span>
     </div>
 

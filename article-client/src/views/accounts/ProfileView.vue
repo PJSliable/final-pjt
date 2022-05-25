@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center w-full pt-10">
     <div>
-      <span class="text-4xl font-bold">{{ profile.nickname }}님의 프로필</span>
+      <span class="font-bold text-3xl md:text-4xl font-DoHyeon">{{ profile.nickname }}님의 프로필</span>
     </div>
     <MyMovieList/>
     <MyReviewList

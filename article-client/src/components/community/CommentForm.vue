@@ -1,13 +1,13 @@
 <template>
   <form @submit.prevent="onSubmit" class="">
-    <label for="comment" class="font-GowunDodum">댓글 작성하기 : </label>
+    <label for="comment" class="font-GowunDodum">댓글 : </label>
     <input
       type="text"
       id="comment"
       v-model="content" required
-      class="border-2 border-slate-900 text-center px-1 font-Jua"
+      class="border-2 border-slate-900 text-center px-1 font-GowunDodum rounded-md"
     >
-    <button class="border-2">댓글 작성 버튼</button>
+    <button class="border-2 m-2 rounded-lg">댓글 작성</button>
   </form>
 </template>
 

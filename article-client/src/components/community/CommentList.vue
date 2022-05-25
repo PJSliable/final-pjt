@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col w-full mt-10 pt-5 px-1 md:px-5 lg:px-10">
-    <p class="flex text-2xl font-bold p-3 md:text-4xl font-DoHyeon">리뷰 목록!</p>
+    <p class="flex text-2xl font-bold p-3 md:text-4xl font-DoHyeon justify-center">댓글 목록</p>
 
     <CommentForm/>
     <CommentItem
