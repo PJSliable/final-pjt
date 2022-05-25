@@ -3,7 +3,7 @@
     <div class="flex w-full justify-center">
       <div class="flex flex-col border-2 border-black bg-white rounded-lg p-5">
         <p class="flex flex-col text-4xl font-bold p-10 pb-10">리뷰 수정하기</p>
-        <p class="flex flex-col text-3xl font-Jua">{{review.movie.title}}</p>
+        <p class="flex flex-col text-3xl font-Jua">{{movieTitle}}</p>
         <ReviewForm
           v-if="isReview"
           :review="review"
@@ -26,7 +26,10 @@ export default {
     ReviewForm,
   },
   computed: {
-    ...mapGetters(['review', 'isReview'])
+    ...mapGetters(['review', 'isReview']),
+    movieTitle() {
+      return this.$store.getters.review?.movie?.title
+    }
   },
   methods: {
     ...mapActions(['fetchReview'])
