@@ -85,7 +85,7 @@
 
               <div class="self-start flex flex-col gap-5">
                 <p class="font-bold text-l sm:text-xl md:text-2xl font-DoHyeon lg:text-4xl">{{ review.title }}</p>
-                <span class="font-GowunDodum">{{ review.created_at.substr(0,10) }}  {{ review.created_at.substr(11,8) }}</span> 
+                <span class="font-GowunDodum">{{ createdAt1 }}  {{ createdAt2 }}</span> 
                 <p class="font-GowunDodum">{{ review.content }}</p>  
               </div>
               <div class="flex gap-3">
@@ -138,10 +138,16 @@ export default {
       return this.review.movie?.title
     },
     imageUrl() {
-      return this.$store.state.movies.imageBaseUrl + this.review.movie?.poster_path
+      return this.$store.state.movies?.imageBaseUrl + this.review.movie?.poster_path
     },
     nickname() {
       return this.review.user?.nickname
+    },
+    createdAt1() {
+      return this.review.created_at?.substr(0,10)
+    },
+    createdAt2() {
+      return  this.review.created_at?.substr(11,8)
     },
   },
   methods: {
