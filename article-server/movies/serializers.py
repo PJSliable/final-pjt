@@ -22,7 +22,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
     like_users = UserSerializer(read_only=True, many=True)
     class Meta:
         model = Review
-        fields = ('user', 'like_users', 'rate', 'title')
+        fields = ('pk', 'user', 'like_users', 'rate', 'title')
 
 class MovieDetailSerializer(serializers.ModelSerializer):
     reviews = ReviewListSerializer(many=True)
