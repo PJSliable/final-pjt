@@ -2,9 +2,12 @@
   <div class="flex flex-col items-center mt-10">
     <div class="p-1 md:p-3 flex flex-col justify-center items-center rounded-lg bg-white w-4/5 md:w-2/3">
       <div class="flex flex-col w-full px-1 md:px-5 lg:px-10">
-        <div class="flex justify-center ">
-          <p class="flex text-2xl font-bold p-3 md:text-4xl font-DoHyeon"><span class="users">{{nickname}}</span>님의 평가</p>
-          <!-- isAuthor가 false로 출력됨 -->
+        <div class="w-full flex justify-between">
+          <div class="w-full">
+            <p class="lg:flex-row text-2xl font-bold p-3 md:text-4xl font-DoHyeon">
+              <span class="users">{{nickname}}</span>님의 리뷰
+            </p>
+          </div>
           <div v-if="isAuthor" class="flex items-center gap-5">
             <router-link :to="{ name: 'reviewEdit', params: { reviewPk } }">
               <svg
