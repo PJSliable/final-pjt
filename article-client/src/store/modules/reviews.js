@@ -39,12 +39,12 @@ export default {
       axios({
         url: api.community.movieInfo(),
         method: 'get',
-        data: {
+        params: {
           moviePk,
         },
       })
         .then(res => {
-          commit('SET_MOVIE_TITLE', res.data)
+          commit('SET_MOVIE_TITLE', res.data.movie_title)
         })
     },
     createReview({ commit, getters }, review) {
