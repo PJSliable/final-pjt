@@ -8,10 +8,12 @@ export default {
   state: {
     reviews: [],
     review: {},
+    movieTitle: '',
   },
   getters: {
     reviews: state => state.reviews,
     review: state => state.review,
+    movieTitle: state => state.movieTitle,
     isAuthor: (state, getters) => {
       return state.review.user?.nickname === getters.currentUser.nickname
     },
@@ -20,6 +22,7 @@ export default {
   mutations: {
     SET_REVIEWS: (state, reviews) => state.reviews = reviews,
     SET_REVIEW: (state, review) => state.review = review,
+    SET_MOVIE_TITLE: (state, movieTitle) => state.movieTitle = movieTitle,
     SET_REVIEW_COMMENTS: (state, comments) => (state.review.comments = comments),
   },
   actions: {
@@ -31,6 +34,18 @@ export default {
       })
         .then(res => commit('SET_REVIEWS', res.data))
         .catch(err => console.error(err.response))
+    },
+    fetchMovieTitle({ commit }, moviePk) {
+      axios({
+        url: api.community.movieInfo(),
+        method: 'post',
+        data: {
+          moviePk,
+        },
+      })
+        .then(res => {
+          commit('SET_MOVIE_TITLE', res.data)
+        })
     },
     createReview({ commit, getters }, review) {
       axios({
@@ -88,8 +103,8 @@ export default {
         confirmButtonText: '삭제',
         cancelButtonText: '취소'
       })
-        .then((result) => {
-          if (result.value) {
+        .then((res) => {
+          if (res.value) {
             axios({
               url: api.community.review(reviewPk),
               method: 'delete',
