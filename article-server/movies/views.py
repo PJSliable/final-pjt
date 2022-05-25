@@ -14,14 +14,11 @@ from django.db.models import Avg, Q
 def movie_list(request):
     # 랜덤 장르 3개, 장르별 영화 24개
     genre_id = request.GET.get('genre_id')
-
     # 중복 제거할려면 request에 user를 담아서 보내야 함.
-    # user = request.user 현재는 AnonymousUser이기에 작업 불가능
-    # reviews = user.reviews.all()
-    # my_movies = user.my_movies.all()
-    # .filter(~Q(pk__in=my_movies) & ~Q(reviews__in=reviews))
-    movies = Movie.objects.filter(genre_ids=genre_id).order_by('?')[:24]
-
+    user = request.user
+    reviews = user.reviews.all()
+    my_movies = user.my_movies.all()
+    movies = Movie.objects.filter(genre_ids=genre_id).filter(~Q(pk__in=my_movies) & ~Q(reviews__in=reviews)).order_by('?')[:24]
     serializer = MovieSummarySerializer(movies, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -153,8 +150,8 @@ def movie_detail(request, moviePk):
 @api_view(['GET'])
 def movieInfo(request):
     movie_pk = request.GET.get('moviePk')
+    print(movie_pk)
     movie_title = Movie.objects.get(pk=movie_pk).title
-
     response = {
         'movie_title': movie_title
         }
