@@ -7,5 +7,5 @@ urlpatterns = [
     path('mymovie/', views.mymovie_create_or_delete),
     path('search/',views.movie_search),
     path('<int:moviePk>/', views.movie_detail),
-
+    path('movieInfo/', views.movieInfo),
 ]

@@ -149,3 +149,13 @@ def movie_detail(request, moviePk):
     movie = get_object_or_404(Movie, pk=moviePk)
     serializer = MovieDetailSerializer(movie)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def movieInfo(request):
+    movie_pk = request.GET.get('moviePk')
+    movie_title = Movie.objects.get(pk=movie_pk).title
+
+    response = {
+        'movie_title': movie_title
+        }
+    return Response(response, status=status.HTTP_200_OK)

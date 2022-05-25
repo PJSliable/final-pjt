@@ -29,7 +29,7 @@
       <div>
         <div class="pt-3">
           <router-link
-            :to="{ name: 'reviewCreate', params: { moviePk: moviePk } }"
+            :to="{ name: 'reviewCreate', params: { moviePk: moviePk, title:movie.title } }"
           >
           <button class="px-10 py-1 m-3 font-Jua bg-orange-400 rounded-lg">리뷰작성하기</button>
           </router-link>
