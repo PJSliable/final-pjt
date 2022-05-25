@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div v-if="this.movie.backdrop_path" class="flex flex-col justify-center items-center mt-10">
-      <img :src="bgImgUrl" alt="backgroundImg" class="absolute pointer-events-none top-0 z-0 opacity-20 blur-sm w-full">
+      <img :src="bgImgUrl" alt="backgroundImg" class="absolute pointer-events-none top-0 z-0 opacity-30 blur-sm w-full">
       <div class="flex z-10 pt-3 flex justify-center items-center">
         <div class="grid shadow-slate-600 shadow-lg rounded-lg grid-cols-3 bg-white flex w-4/5 md:w-2/3">
           <div class="w-full flex justify-center items-center">
