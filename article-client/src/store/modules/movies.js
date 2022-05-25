@@ -33,12 +33,12 @@ export default {
   },
   getters: {
     genres: state => state.genres,
-    noSearchMovies: state => state.noSearchMovies
   },
   mutations: {
     CLEAR_MOVIES(state) {
       state.movies = []
       state.recommendMovies = []
+      state.searchMovies = []
     },
     FETCH_RECOMMEND_MOVIES(state, movies) {
       state.recommendMovies = movies
