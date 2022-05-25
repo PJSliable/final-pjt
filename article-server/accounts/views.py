@@ -47,7 +47,7 @@ def update(request):
 
 @api_view(['GET'])
 def user_detail(request):
-    serializer = CustomRegisterSerializer(User)
+    serializer = CustomRegisterSerializer(request.user)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 # 복붙한거라 실행되는지 모르겠음. test 필요
