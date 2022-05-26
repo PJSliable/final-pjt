@@ -7,6 +7,7 @@
         :loop="false"
         :nav="false"
       >
+        
         <MovieCard
           v-for="(movie, index) in movieList"
           :key="index"
@@ -14,6 +15,7 @@
           :isLiked="false"
           class="mb-12"
         />
+        
       </carousel>
     </div>
     <div class="hidden sm:inline md:hidden">
@@ -48,10 +50,11 @@
     </div>
     <div class="hidden lg:inline">
       <carousel
+        class="flex mx-20"
         :items="6"
-        :loop="false"
         :nav="false"
       >
+      <button slot="prev"><span aria-hidden="true" class="prev bg-slate-500 rounded-full p-5 carousel-control-prev-icon inline-block bg-no-repeat"></span></button>
         <MovieCard
           v-for="(movie, index) in movieList"
           :key="index"
@@ -59,6 +62,7 @@
           :isLiked="false"
           class="mb-12"
         />
+      <button slot="next"><span class="next bg-slate-500 rounded-full p-5 carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span></button>
       </carousel>
     </div>
   </div>
