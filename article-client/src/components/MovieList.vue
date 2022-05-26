@@ -50,7 +50,7 @@
     </div>
     <div class="hidden lg:inline carousel-inner relative w-full overflow-hidden">
       <carousel
-        class="flex mx-20"
+        class="flex mx-40"
         :items="6"
         :nav="false"
       >
@@ -64,7 +64,7 @@
           :isLiked="false"
           class="mb-12"
         />
-      <button slot="next" class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0">
+      <button slot="next" class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 right-0">
         <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
       </button>
       </carousel>
@@ -103,5 +103,11 @@ export default {
 </script>
 
 <style scoped>
+.carousel-control-prev-icon {
+ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
 
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
 </style>

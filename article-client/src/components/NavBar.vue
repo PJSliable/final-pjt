@@ -4,8 +4,8 @@
   >
     <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6 text-l text-white pr-2 font-semibold">
       <!-- 로고로 변경 필-->
-      <router-link v-if="isLoggedIn" class="text-4xl text-white pr-2 font-semibold font-DoHyeon" :to="{ name: 'movie' }">Navbar</router-link>
-      <router-link v-else class="nav-link text-xl text-white pr-2 font-semibold font-DoHyeon"  :to="{ name: 'home' }">Navbar</router-link>
+      <router-link v-if="isLoggedIn" class="logo text-4xl text-white pr-2 font-semibold font-DoHyeon" :to="{ name: 'movie' }">GGM</router-link>
+      <router-link  v-else class="logo text-4xl text-white pr-2 font-semibold font-DoHyeon"  :to="{ name: 'home' }">GGM</router-link>
 
       <button
         class="navbar-toggler text-gray-200 border-0 hover:shadow-none hover:no-underline py-2 px-2.5 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline"
@@ -45,12 +45,12 @@
 
         <ul class="navbar-nav flex flex-col pr-0 list-style-none mr-0">
           <li class="nav-item p-2">
-            <router-link v-if="isLoggedIn" :to="{ name: 'profile', params: { nickname } }" class="nav-link font-DoHyeon text-xl">{{ nickname }}님 안녕하세요</router-link>
+            <router-link v-if="isLoggedIn" :to="{ name: 'profile', params: { nickname } }" class="nav-link font-DoHyeon text-xl">My Profile</router-link>
             <router-link v-else class="nav-link" :to="{ name: 'login'}">Login</router-link>
           </li>
           <li class="nav-item p-2">
             <router-link v-if="isLoggedIn" class="nav-link font-DoHyeon text-xl" :to="{ name: 'logout' }">Logout</router-link>
-            <router-link v-else :to="{ name: 'signup' }">Signup</router-link>
+            <router-link v-else class="nav-link" :to="{ name: 'signup' }">Signup</router-link>
           </li>
         </ul>
       </div>
@@ -80,16 +80,26 @@ nav {
   padding: 20px;
 }
 
-nav a {
+.logo {
+  color: black
+}
+.logo:hover {
+  color: black
+}
+nav .logo.router-link-exact-active {
   color: black
 }
 
-nav a:hover{
-  color: #e1e1e1
+.nav-link {
+  color: black
+}
+
+.nav-link:hover{
+  color: #c5c5c5
 }
 
 nav a.router-link-exact-active {
   font-weight: bold;
-  color: #e1e1e1
+  color: #c5c5c5
 }
 </style>
