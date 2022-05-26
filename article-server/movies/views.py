@@ -124,7 +124,7 @@ def movie_recommends(request):
         reviews = user.reviews.all()
         my_movies = user.my_movies.all()
         # 중복 제거 & 투표순 정렬 
-        genre_recommended_movies = now_genre.genres.filter(~Q(pk__in=my_movies) & ~Q(reviews__in=reviews)).order_by('-vote_average')[:need_number]
+        genre_recommended_movies = now_genre.genres.filter(~Q(pk__in=my_movies) & ~Q(reviews__in=reviews)).order_by('-vote_average')[:need_number][:12]
         recommended_movies.extend(list(genre_recommended_movies))
 
     serializer = MovieSummarySerializer(recommended_movies, many=True)
