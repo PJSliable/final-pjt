@@ -48,13 +48,15 @@
         />
       </carousel>
     </div>
-    <div class="hidden lg:inline">
+    <div class="hidden lg:inline carousel-inner relative w-full overflow-hidden">
       <carousel
         class="flex mx-20"
         :items="6"
         :nav="false"
       >
-      <button slot="prev"><span aria-hidden="true" class="prev bg-slate-500 rounded-full p-5 carousel-control-prev-icon inline-block bg-no-repeat"></span></button>
+      <button slot="prev" class="carousel-control-prev absolute z-10 top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0">
+      <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+      </button>
         <MovieCard
           v-for="(movie, index) in movieList"
           :key="index"
@@ -62,7 +64,9 @@
           :isLiked="false"
           class="mb-12"
         />
-      <button slot="next"><span class="next bg-slate-500 rounded-full p-5 carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span></button>
+      <button slot="next" class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0">
+        <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+      </button>
       </carousel>
     </div>
   </div>
